@@ -1,2 +1,2 @@
-# mis3371-hw1
+# mis3371
 MIS 3371 Homework 1
