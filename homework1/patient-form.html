@@ -167,9 +167,9 @@ Purpose: MIS 3371 Homework 1 HTML Form
                               type="text"
                               name="address2"
                               id="address2"
-                              maxlength="40"
+                              maxlength="30"
                               title="Please eneter your apartment or suite number (if applicable)"
-                              placeholder="150"
+                              placeholder="194"
                               />
                         </td>
                     </tr>
@@ -245,12 +245,56 @@ Purpose: MIS 3371 Homework 1 HTML Form
                             <option value="WV">West Virginia</option>
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
-                        </select>
-                      </td>
-                  </tr>
+                          </select>
+                        </td>
+                    </tr>
+                  
 
+                    <tr>
+                        <td class="td1"><label for=zip>Zip Code:</label></td>
+                        <td>
+                            <input
+                              type="text"
+                              name="zip"
+                              id="zip"
+                              pattern=[0-9] {5}
+                              maxlength="5"
+                              required
+                              title="Please eneter your zip code"
+                              placeholder="89118"
+                              />
+                        </td>
+                    </tr>
 
+                    <tr>
+                        <td class="td1"><label for=email>Email Address:</label></td>
+                        <td>
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              required
+                              title="Please eneter your email address"
+                              placeholder="connormcgregor194@gmail.com"
+                              />
+                        </td>
+                    </tr>
 
+                    <tr>
+                        <td class="td1"><label for=phone>Phone Number:</label></td>
+                        <td>
+                            <input
+                              type="text"
+                              name="phone"
+                              id="phone"
+                              pattern=[0-9] {3}-[0-9] {3}-[0-9] {4}
+                              maxlength="30"
+                              required
+                              title="Please eneter your phone number"
+                              placeholder="111-999-444"
+                              />
+                        </td>
+                    </tr>
                   
                 </table>
           </div>
