@@ -12,7 +12,7 @@ document.getElementById("today").innerHTML = text;
 
 //range slider js code//
 let slider = document.getElementById("range")
-  let output = document.getElementById("range-slideer")
+  let output = document.getElementById("range-slider")
   output.innerHTML = slider.value;
 
 slider.oninput = function () {output.innerHTML = this.value;};
