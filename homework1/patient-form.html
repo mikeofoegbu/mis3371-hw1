@@ -350,7 +350,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
 
                     <!-- html for range slider-->
                     <tr>
-                        <td class="td1"><label for=range>Urgency of Appointment? <br/>(Rate from 1 to 10</label></td>
+                        <td class="td1"><label for=range>Urgency of Appointment? <br/>(Rate from 1 to 10)</label></td>
                         <td>
                             <input
                               type="range"
@@ -361,6 +361,46 @@ Purpose: MIS 3371 Homework 1 HTML Form
                               value="0"
                               />
                               <span id="range-slider"></span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="4"><hr></th> <!-- divider line-->
+                    </tr>
+                    
+                    <!-- account information section begins here-->
+                    <tr>
+                        <th colspan="4">Finish Patient Portal Account</th>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="uname">Username:</label></td>
+                        <td>
+                            <input
+                              type="text"
+                              name="uname"
+                              id="uname"
+                              maxlength="15"
+                              required
+                              title="Please eneter your user name"
+                              placeholder="ufcgoat2000"
+                              />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="pass">Password:</label></td>
+                        <td>
+                            <input
+                              type="password"
+                              name="pass"
+                              id="pass"
+                              minlength="10"
+                              maxlength="30"
+                              required
+                              title="Please eneter your password"
+                              placeholder="Required"
+                              />
                         </td>
                     </tr>
                   
