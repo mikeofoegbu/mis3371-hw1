@@ -308,8 +308,6 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=pat_hist>Have you ever had/are you currently experiencing?</label></td>
                         <td>
-                            <input type="checkbox" id="option1" value="Acne"/>
-                            <label for="Acne">Acne</label><br>
 
                             <input type="checkbox" id="concussion" name="history" value="Concussion / Head Trauma">
                             <label for="concussion">Concussion / Head Trauma</label><br>
@@ -332,9 +330,23 @@ Purpose: MIS 3371 Homework 1 HTML Form
                             <input type="checkbox" id="other" name="history" value="Other">
                             <label for="other">Other</label><br>
                         </td>
+                    <tr>
+                        <td class="td1"> align="right">
+                            <label for="notes">If you selected any of the above, please explain:</label>
+                        </td>
+                        <td>
+                            <textarea
+                              rows="4"
+                              cols="50"
+                              maxlength="500"
+                              id="notes"
+                              name="notes"
+                              title="Please eneter a brief description of your symptoms"
+                              placeholder="(Insert text here...)"
+                              ></textarea>
+                        </td>
                     </tr>
-
-
+                    
                   
                 </table>
           </div>
