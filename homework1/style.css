@@ -53,3 +53,36 @@ th {
     font-family: "optima", sans-serif;
     font-weight: bold;
 }
+
+footer {
+    position: flex;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(160, 192, 192, 0.442);
+    height: 2.5 rem;
+}
+
+#footer {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+label {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+input {
+    text-align: left;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+textarea {
+    text-align: left;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
