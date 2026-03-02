@@ -4,3 +4,8 @@ Name: Michale Ofoegbu
   Date last edited: 02/27/2026
   Purpose: MIS 3371 Homework 1 CSS Form
 */
+
+header {
+  width: 100%;
+  backgroud-color: red
+}
