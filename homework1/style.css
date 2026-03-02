@@ -86,3 +86,15 @@ textarea {
     font-family: "optima", sans-serif;
     font-weight: normal;
 }
+
+#today {
+    text-align: left;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+p {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
