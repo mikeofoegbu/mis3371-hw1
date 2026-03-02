@@ -9,3 +9,6 @@ header {
   width: 100%;
   backgroud-color: red;
 }
+body {
+    background-color: yellow;
+}
