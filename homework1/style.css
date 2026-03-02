@@ -9,9 +9,6 @@ header {
   width: 100%;
   background-color: red;
 }
-header table {
-  background-color: inherit;
-}
 
 body {
   display: flex;
