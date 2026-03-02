@@ -6,8 +6,8 @@ Name: Michael Ofoegbu
 */
 
 header {
-  backgroud-color: red;
+  background-color: red;
 }
-body {
-  background-color: yellow;
+header table {
+  background-color: inherit;
 }
