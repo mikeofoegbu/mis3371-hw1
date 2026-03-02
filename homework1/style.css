@@ -58,7 +58,7 @@ footer {
     position: flex;
     bottom: 0;
     width: 100%;
-    background-color: rgba(160, 192, 192, 0.442);
+    background-color: grey);
     height: 2.5 rem;
 }
 
