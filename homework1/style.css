@@ -37,3 +37,19 @@ main {
     font-weight: normal;
     flex-grow: 1;
 }
+
+.image {
+    text-align: left;
+}
+
+.td1 {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+th {
+    text-align: center;
+    font-family: "optima", sans-serif;
+    font-weight: bold;
+}
