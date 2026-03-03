@@ -1,5 +1,5 @@
 /*
-Name: Michale Ofoegbu
+Name: Michael Ofoegbu
   Date created: 02/22/2026
   Date last edited: 03/02/2026
   Purpose: MIS 3371 Homework 1 HTML Form
