@@ -1,14 +1,22 @@
 /*
 Name: Michael Ofoegbu
-  Date created: 03/02/2026
-  Date last edited: 03/02/2026
-  Purpose: MIS 3371 Homework 1 CSS Form
+Date created: 03/02/2026
+Date last edited: 03/02/2026
+Purpose: MIS 3371 Homework 1 CSS Form
 */
+
+/* UFC-style font variables using system fonts only */
+:root {
+    --ufc-head: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+    --ufc-body: "Helvetica Neue", Arial, sans-serif;
+}
+
 /* styles header section containing logo, clinic title, and dynamic date */
 header {
     width: 100%;
     background-color: red; /* red background aligns with UFC brand colors */
 }
+
 /* body uses flexbox to center content and keep footer positioned at bottom */
 body {
     display: flex; /* enables flexible vertical layout */
@@ -18,41 +26,54 @@ body {
     margin: 0;
     height: 100%;
     min-height: 100vh; /* ensures page fills full viewport height */
+    font-family: var(--ufc-body); /* default body font */
 }
+
 /* allows form to expand and push footer downward */
 form {
     flex-grow: 1;
 }
+
 /* heading styles for main page title and confirmation page */
 h1, h2 {
     text-align: center;
-    font-family: "Copperplate", fantasy;
+    font-family: var(--ufc-head); /* bold, condensed UFC-style font */
     font-weight: normal;
+    text-transform: uppercase; /* matches UFC branding */
+    letter-spacing: 0.04em; /* slight spacing for athletic look */
     flex-grow: 1;
 }
+
 /* centers thank you message on confirmation page */
 main {
     text-align: center;
-    font-family: "Copperplate", fantasy;
+    font-family: var(--ufc-head);
     font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     flex-grow: 1;
 }
 
 .image {
     text-align: left;
 }
+
 /* aligns form labels to right side for clean form layout */
 .td1 {
     text-align: right;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
+
 /* bold section headers within form */
 th {
     text-align: center;
-    font-family: "optima", sans-serif;
-    font-weight: bold;
+    font-family: var(--ufc-head); /* section headers use UFC-style font */
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
+
 /* footer styling with grey background and full width layout */
 footer {
     position: flex;
@@ -61,40 +82,43 @@ footer {
     background-color: grey;
     height: 2.5 rem;
 }
+
 /* styles paragraph inside footer */
 #footer {
     text-align: right;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
     margin-right: 10px;
 }
+
 /* consistent font styling applied to form labels and inputs */
 label {
     text-align: right;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
 
 input {
     text-align: left;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
 
 textarea {
     text-align: left;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
+
 /* styles dynamically inserted date in header */
 #today {
     text-align: left;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
 
 p {
     text-align: right;
-    font-family: "optima", sans-serif;
+    font-family: var(--ufc-body);
     font-weight: normal;
 }
