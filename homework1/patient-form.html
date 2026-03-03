@@ -13,12 +13,13 @@ Purpose: MIS 3371 Homework 1 HTML Form
       <title> Post-Fight Medical Registration | UFC Performance Clinic </title>
   </head>
   <body>
-    <header>
+    <header> <!-- header table used to structure logo, title, and dynamic date -->
       <table width="100%>
         <tr>
           <td valign="top" align="left" width="20%">
             <div class="image">
               <img align="center" src="ufclogo.png" alt="UFC Performance Clinic Logo" width="160px" id="Logo"/>
+              <!-- UFC logo image displayed in top left of header -->
             </div>
           </td>
 
@@ -27,15 +28,15 @@ Purpose: MIS 3371 Homework 1 HTML Form
           </td>
 
           <td valign="bottom" align="right" width="20%"
-            <strong> Today's Date:</strong> <span id="today"></span>  
+            <strong> Today's Date:</strong> <span id="today"></span>
+            <!-- span used to dynamically insert today's date via JavaScript -->
           </td>
-
         </tr>
       </table>
     </header>
 <hr>
 <!-- form begins here-->
-<form action="thankyou.html">
+<form action="thankyou.html"> <!-- form sends user to thankyou.html upon successful validation -->
       <center>
           <div class="format">
                 <table>
@@ -47,6 +48,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for="fname">First Name:</label></td>
                         <td>
+                            <!-- text input field for patient's first name (max 30 characters, required) -->
                             <input
                               type="text"
                               name="fname"
@@ -62,6 +64,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for="mini">Middle Initial:</label></td>
                         <td>
+                            <!-- text input field limited to one character for middle initial -->
                             <input
                               type="text"
                               name="mini"
@@ -124,6 +127,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                           <td class="td1"><label for="ssn">SSN:</label></td>
                           <td>
+                            <!-- password field used to obscure social security number input -->
                             <input
                               type="password"
                               minlength="11"
@@ -163,6 +167,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=address2>Apt/Suite #:</label></td>
                         <td>
+                            <!-- dropdown menu containing all U.S. states -->
                             <input
                               type="text"
                               name="address2"
@@ -253,6 +258,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=zip>Zip Code:</label></td>
                         <td>
+                            <!-- zip code field restricted to 5 numeric digits using pattern validation -->
                             <input
                               type="text"
                               name="zip"
@@ -283,6 +289,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=phone>Phone Number:</label></td>
                         <td>
+                            <!-- phone number field formatted as XXX-XXX-XXXX using pattern validation -->
                             <input
                               type="text"
                               name="phone"
@@ -308,7 +315,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=pat_hist>Have you ever had/are you currently experiencing?</label></td>
                         <td>
-
+                            <!-- checkboxes allow user to select multiple previous medical conditions -->
                             <input type="checkbox" id="concussion" name="history" value="Concussion / Head Trauma">
                             <label for="concussion">Concussion / Head Trauma</label><br>
 
@@ -335,6 +342,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                             <label for="notes">If you selected any of the above, please explain:</label>
                         </td>
                         <td>
+                            <!-- textarea allows user to provide additional explanation of symptoms -->
                             <textarea
                               rows="4"
                               cols="40"
@@ -352,6 +360,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=range>Urgency of Appointment? <br/>(Rate from 1 to 10)</label></td>
                         <td>
+                            <!-- range slider allows patient to rate urgency from 1 to 10 -->
                             <input
                               type="range"
                               name="range"
@@ -376,6 +385,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for="uname">Username:</label></td>
                         <td>
+                            <!-- username field (separate from email as required by rubric) -->
                             <input
                               type="text"
                               name="uname"
@@ -391,6 +401,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for="pass">Password:</label></td>
                         <td>
+                            <!-- password field requires 10-30 characters -->
                             <input
                               type="password"
                               name="pass"
@@ -407,6 +418,8 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1" colspan="4">
                             <center>
+                                 <!-- submit button validates form and redirects to thank you page -->
+                                 <!-- reset button clears all form inputs -->
                                  <input type="submit" name="submit" id="submit">
                                   &nbsp;&nbsp;&nbsp;
                                  <input type="reset" name="reset" id="reset">  
@@ -421,6 +434,6 @@ Purpose: MIS 3371 Homework 1 HTML Form
     <p id="footer"> &#169 2026 UFC Performance Clinic | <a href="https://www.ufc.com/ufc-athlete-health-and-performance" target="UFC.com" rel="noopener nonreferer">Contact Us</a></p>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js"></script> <!-- links external JavaScript file for dynamic date and interactive features -->
   </body>
 </html>
