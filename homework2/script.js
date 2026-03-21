@@ -55,6 +55,7 @@ if (!ssnR.test(ssn)) {
     return true;
 }
 
+// address 1 validation js code  
 function validateAddress1() {
     var ad1 = document.getElementById("address1").value;
     console.log(ad1);
@@ -68,4 +69,24 @@ function validateAddress1() {
         document.getElementById("address1-error").innerHTML = "";
         return true;
     }
+}
+
+// zip code validation js code
+function validateZip() {
+    const zipInput = document.getElementById("zip");
+    let zip = zipInput.value.replace(/[^\d-]/g, ""); // removes any non-number and non-dash characters
+
+    if (!zip) {
+        document.getElementById("zip-error").innerHTML =
+        "Zip code cannot be left blank.";
+        return false;
+    }
+
+    if (zip.length > 5) {
+        zip = zip.slice(0,5); // removes all digits after first 5
+    }
+
+    zipInput.value = zip;
+    document.getElementById("zip-error").innerHTML = "";
+    return true;
 }
