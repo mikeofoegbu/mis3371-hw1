@@ -289,6 +289,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               title="Numbers only"
                               placeholder="89118"
                               pattern="[0-9]{5}"
+                              onblur="validateZip()"
                               />
                         </br>
                         <span class="error" id="zip-error"></span>  
@@ -324,7 +325,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                               maxlength="12"
                               required
-                              title="Please eneter your phone number"
+                              title="Please enter your phone number"
                               placeholder="123-123-1234"
                               onblur="validatePhone()"
                               />
@@ -476,7 +477,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
           <span id="msg5"></span> <br/>
           <span id="msg6"></span> <br/>
           <span id="msg7"></span> <br/>
-          <span id="pass"></span> <br/>
+          <span id="pass-display"></span> <br/>
       </div>
           <center>
               <p id="showInput"></p>
