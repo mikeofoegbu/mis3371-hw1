@@ -56,8 +56,12 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               maxlength="30"
                               required
                               title="Please eneter your first name"
+                              pattern="[a-zA-Z']{1,30}"
+                              onblur="validateFname()"
                               placeholder="Connor"
                               />
+                        </br>
+                        <span class="error" id="fname-error"></span>  
                         </td>
                     </tr>
 
@@ -71,8 +75,12 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               id="mini"
                               maxlength="1"
                               title="Please eneter your middle initial"
+                              pattern="[a-zA-Z']{0,1}"
+                              onblur="validateMini()"
                               placeholder="A"
                               />
+                        </br>
+                        <span class="error" id="mini-error"></span>  
                         </td>
                     </tr>
 
@@ -86,8 +94,12 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               maxlength="30"
                               required
                               title="Please eneter your last name"
+                              pattern="[a-zA-Z']{1,30}"
+                              onblur="validateLname()"
                               placeholder="McGregor"
                               />
+                          </br>
+                          <span class="error" id="lname-error"></span>  
                           </td>
                     </tr>
                     
