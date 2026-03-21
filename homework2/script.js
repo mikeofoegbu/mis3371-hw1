@@ -109,3 +109,20 @@ function validateEmail() {
         return true;
     }
 }
+
+// phone number validation js code
+function validatePhone() {
+    const phonInput = document.getElementById("phone-error");
+    const phone = phoneInput.value.replace(/\D/g, ""); //removes all non-number characters
+
+    if (phone.length !== 10) {
+        document.getElementById("phone-error");innerHTML
+        "Phone number cannot be left blank.";
+        return false;
+    }
+
+    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6)
+    phoneInput.value = formattedPhone;
+    document.getElementById("phone-error").innerHTML = "";
+    return true; 
+}  
