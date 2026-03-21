@@ -55,7 +55,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               id="fname"
                               maxlength="30"
                               required
-                              title="Please eneter your first name"
+                              title="Letters, apostrophes, and dashes is only"
                               pattern="[a-zA-Z']{1,30}"
                               onblur="validateFname()"
                               placeholder="Connor"
@@ -74,7 +74,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               name="mini"
                               id="mini"
                               maxlength="1"
-                              title="Please eneter your middle initial"
+                              title="Letters only"
                               pattern="[a-zA-Z']{0,1}"
                               onblur="validateMini()"
                               placeholder="A"
@@ -93,7 +93,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               id="lname"
                               maxlength="30"
                               required
-                              title="Please eneter your last name"
+                              title="Letters, apostrophes, and dashes is only"
                               pattern="[a-zA-Z']{1,30}"
                               onblur="validateLname()"
                               placeholder="McGregor"
@@ -131,7 +131,11 @@ Purpose: MIS 3371 Homework 2 HTML Form
                                   type="date"
                                   id="dob"
                                   name="dob"
+                                  onblur="validateDob()"
+                                  required
                                   />
+                          </br>
+                          <span class="error" id="dob-error"></span>  
                           </td>
                     </tr>
 
@@ -146,9 +150,12 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               name="ssn"
                               id="ssn"
                               required
-                              title="Please eneter your social security number"
+                              title="Numbers only"
                               placeholder="123-45-6789"
+                              onblur="validateSsn()"
                               />
+                          </br>
+                          <span class="error" id="ssn-error"></span>   
                           </td>
                     </tr>
                   
@@ -171,7 +178,10 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               required
                               title="Please eneter your address"
                               placeholder="6650 S Torrey Pines Dr"
+                              onblur="validateAddress1()"
                               />
+                        </br>
+                        <span class="error" id="address1-error"></span>
                         </td>
                     </tr>
 
@@ -274,12 +284,14 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               type="text"
                               name="zip"
                               id="zip"
-                              pattern="[0-9]{5}"
                               maxlength="5"
                               required
-                              title="Please eneter your zip code"
+                              title="Numbers only"
                               placeholder="89118"
+                              pattern="[0-9]{5}"
                               />
+                        </br>
+                        <span class="error" id="zip-error"></span>  
                         </td>
                     </tr>
 
@@ -293,7 +305,11 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               required
                               title="Please eneter your email address"
                               placeholder="ufcmed@gmail.com"
+                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+                              onblur="validateEmail()"
                               />
+                        </br>
+                        <span class="error" id="email-error"></span>  
                         </td>
                     </tr>
 
