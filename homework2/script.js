@@ -19,7 +19,7 @@ slider.oninput = function () {output.innerHTML = this.value;}; // updates displa
 
 // dob validation js code
 function validateDob() {
-    dob = document.getElementById("dob");
+    let dob = document.getElementById("dob");
     let date = new Date(dob.value);
     let maxDate = new Date().setFullYear(new Date().getFullYear() - 120);
 
@@ -46,13 +46,14 @@ function validateSsn() {
     // regex for ssn pattern thing
     const ssnR = /^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
 
-if (!ssnR.test(ssn)) {
-    document.getElementById("ssn-error").innerHTML =
-    "Please enter a valid Social Security Number.";
-    return false;
-} else {
-    document.getElementById("ssn-error").innerHTML = "";
-    return true;
+    if (!ssnR.test(ssn)) {
+        document.getElementById("ssn-error").innerHTML =
+        "Please enter a valid Social Security Number.";
+        return false;
+    } else {
+        document.getElementById("ssn-error").innerHTML = "";
+        return true;
+    }
 }
 
 // address 1 validation js code  
@@ -93,7 +94,7 @@ function validateZip() {
 
 // email validation js code
 function validateEmail() {
-    email = document.getElementById("email").value;
+    let email = document.getElementById("email").value;
     var emailR = /^\w+(([.-]?\w+)*)@\w+(([.-]?\w+)*)\.\w{2,3}+$/; //regex pattern thing for email
 
     if (email =="") {
@@ -112,7 +113,7 @@ function validateEmail() {
 
 // phone number validation js code
 function validatePhone() {
-    const phonInput = document.getElementById("phone-error");
+    const phoneInput = document.getElementById("phone-error");
     const phone = phoneInput.value.replace(/\D/g, ""); //removes all non-number characters
 
     if (phone.length !== 10) {
