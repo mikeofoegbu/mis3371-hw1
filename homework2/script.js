@@ -17,6 +17,7 @@ let slider = document.getElementById("range") // selects the range input element
 
 slider.oninput = function () {output.innerHTML = this.value;}; // updates displayed value dynamically whenever slider is moved
 
+// dob validation js code
 function validateDob() {
     dob = document.getElementById("dob");
     let date = new Date(dob.value);
@@ -35,5 +36,36 @@ function validateDob() {
     } else {
         document.getElementById("dob-error").innerHTML = "";
         return true
+    }
+}
+
+// ssn validation js code
+function validateSsn() {
+    const ssn = document.getElementById("ssn").value;
+
+    // regex for ssn pattern thing
+    const ssnR = /^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
+
+if (!ssnR.test(ssn)) {
+    document.getElementById("ssn-error").innerHTML =
+    "Please enter a valid Social Security Number.";
+    return false;
+} else {
+    document.getElementById("ssn-error").innerHTML = "";
+    return true;
+}
+
+function validateAddress1() {
+    var ad1 = document.getElementById("address1").value;
+    console.log(ad1);
+    console.log(ad1.length);
+
+    if (ad1.length < 2) {
+        document.getElementById("address1-error").innerHTML =
+        "Please enter something on address line";
+        return false;
+    } else {
+        document.getElementById("address1-error").innerHTML = "";
+        return true;
     }
 }
