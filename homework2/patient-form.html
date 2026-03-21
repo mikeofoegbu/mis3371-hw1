@@ -326,7 +326,10 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               required
                               title="Please eneter your phone number"
                               placeholder="123-123-1234"
+                              onblur="validatePhone()"
                               />
+                        <span class="error" id="phone-error"></span>  
+                        </td>  
                         </td>
                     </tr>
 
@@ -417,11 +420,15 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               type="text"
                               name="uname"
                               id="uname"
+                              minlength="5"
                               maxlength="15"
                               required
-                              title="Please eneter your user name"
+                              title="Username must contain at least five characters. Cannot start with a number."
                               placeholder="ufcgoat2000"
+                              onblur="validateUname()"
                               />
+                        </br>
+                        <span class="error" id="uname-error"></span>  
                         </td>
                     </tr>
 
@@ -436,9 +443,14 @@ Purpose: MIS 3371 Homework 2 HTML Form
                               minlength="10"
                               maxlength="30"
                               required
-                              title="Please eneter your password"
+                              title="Password must contain at least ten characters, one uppercase letter, one lowercase letter, one number and one special character."
                               placeholder="Required"
+                              onblur="validatePass()"
+                              oninput="validatePass()"
+                              onfocus="validatePass()"
                               />
+                        </br>
+                        <span class="error" id="pass-error"></span>  
                         </td>
                     </tr>
 
