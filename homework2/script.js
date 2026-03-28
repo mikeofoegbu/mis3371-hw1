@@ -1,8 +1,8 @@
 /*
 Name: Michael Ofoegbu
   Date created: 03/20/2026
-  Date last edited: 03/25/2026
-  Purpose: MIS 3371 Homework 1 HTML Form
+  Date last edited: 03/27/2026
+  Purpose: MIS 3371 Homework 2 HTML Form
 */
 
 //dynamic date js code//
@@ -11,11 +11,64 @@ let text = d.toLocaleDateString(); // converts date into readable local date for
 document.getElementById("today").innerHTML = text; // inserts formatted date into span element with id="today" in HTML header
 
 //range slider js code//
-let slider = document.getElementById("range") // selects the range input element from the form
-  let output = document.getElementById("range-scale") // selects span element that displays current slider value
-  output.innerHTML = slider.value; // displays default slider value when page first loads
+let slider = document.getElementById("range"); // selects the range input element from the form
+let output = document.getElementById("range-scale"); // selects span element that displays current slider value
+output.innerHTML = slider.value; // displays default slider value when page first loads
 
 slider.oninput = function () {output.innerHTML = this.value;}; // updates displayed value dynamically whenever slider is moved
+
+// first name validation js code
+function validateFname() {
+    let fname = document.getElementById("fname").value;
+    const fnameR = /^[a-zA-Z']{1,30}$/;
+
+    if (fname == "") {
+        document.getElementById("fname-error").innerHTML =
+        "First name cannot be empty.";
+        return false;
+    } else if (!fnameR.test(fname)) {
+        document.getElementById("fname-error").innerHTML =
+        "Letters, apostrophes, and dashes only.";
+        return false;
+    } else {
+        document.getElementById("fname-error").innerHTML = "";
+        return true;
+    }
+}
+
+// middle initial validation js code
+function validateMini() {
+    let mini = document.getElementById("mini").value;
+    const miniR = /^[a-zA-Z]{0,1}$/;
+
+    if (!miniR.test(mini)) {
+        document.getElementById("mini-error").innerHTML =
+        "Middle initial must be one letter only.";
+        return false;
+    } else {
+        document.getElementById("mini-error").innerHTML = "";
+        return true;
+    }
+}
+
+// last name validation js code
+function validateLname() {
+    let lname = document.getElementById("lname").value;
+    const lnameR = /^[a-zA-Z']{1,30}$/;
+
+    if (lname == "") {
+        document.getElementById("lname-error").innerHTML =
+        "Last name cannot be empty.";
+        return false;
+    } else if (!lnameR.test(lname)) {
+        document.getElementById("lname-error").innerHTML =
+        "Letters, apostrophes, and dashes only.";
+        return false;
+    } else {
+        document.getElementById("lname-error").innerHTML = "";
+        return true;
+    }
+}
 
 // dob validation js code
 function validateDob() {
@@ -35,7 +88,7 @@ function validateDob() {
         return false;
     } else {
         document.getElementById("dob-error").innerHTML = "";
-        return true
+        return true;
     }
 }
 
@@ -97,7 +150,7 @@ function validateEmail() {
     let email = document.getElementById("email").value;
     var emailR = /^\w+(([.-]?\w+)*)@\w+(([.-]?\w+)*)\.\w{2,3}+$/; //regex pattern thing for email
 
-    if (email =="") {
+    if (email == "") {
         document.getElementById("email-error").innerHTML =
         "Email cannot be empty.";
         return false;
@@ -122,8 +175,55 @@ function validatePhone() {
         return false;
     }
 
-    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6)
+    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6);
     phoneInput.value = formattedPhone;
     document.getElementById("phone-error").innerHTML = "";
-    return true; 
+    return true;
+}
+
+// username validation js code
+function validateUname() {
+    let uname = document.getElementById("uname").value;
+    const unameR = /^[a-zA-Z][a-zA-Z0-9]{4,14}$/; // must start with a letter, 5-15 chars total
+
+    if (uname == "") {
+        document.getElementById("uname-error").innerHTML =
+        "Username cannot be empty.";
+        return false;
+    } else if (!unameR.test(uname)) {
+        document.getElementById("uname-error").innerHTML =
+        "Username must be 5-15 characters and cannot start with a number.";
+        return false;
+    } else {
+        document.getElementById("uname-error").innerHTML = "";
+        return true;
+    }
+}
+
+// password validation js code
+function validatePass() {
+    let pass = document.getElementById("pass").value;
+
+    // regex checks for each password requirement
+    const hasUpper = /[A-Z]/.test(pass);
+    const hasLower = /[a-z]/.test(pass);
+    const hasNumber = /[0-9]/.test(pass);
+    const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pass);
+    const hasLength = pass.length >= 10;
+
+    // display requirement messages dynamically as user types
+    document.getElementById("msg1").innerHTML = hasLength ? "✓ At least 10 characters" : "✗ At least 10 characters";
+    document.getElementById("msg2").innerHTML = hasUpper ? "✓ At least one uppercase letter" : "✗ At least one uppercase letter";
+    document.getElementById("msg3").innerHTML = hasLower ? "✓ At least one lowercase letter" : "✗ At least one lowercase letter";
+    document.getElementById("msg4").innerHTML = hasNumber ? "✓ At least one number" : "✗ At least one number";
+    document.getElementById("msg5").innerHTML = hasSpecial ? "✓ At least one special character" : "✗ At least one special character";
+
+    if (!hasLength || !hasUpper || !hasLower || !hasNumber || !hasSpecial) {
+        document.getElementById("pass-error").innerHTML =
+        "Password does not meet requirements.";
+        return false;
+    } else {
+        document.getElementById("pass-error").innerHTML = "";
+        return true;
+    }
 }
