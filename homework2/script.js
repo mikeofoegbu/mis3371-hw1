@@ -113,11 +113,11 @@ function validateEmail() {
 
 // phone number validation js code
 function validatePhone() {
-    const phoneInput = document.getElementById("phone-error");
+    const phoneInput = document.getElementById("phone");
     const phone = phoneInput.value.replace(/\D/g, ""); //removes all non-number characters
 
     if (phone.length !== 10) {
-        document.getElementById("phone-error");innerHTML
+        document.getElementById("phone-error").innerHTML =
         "Phone number cannot be left blank.";
         return false;
     }
