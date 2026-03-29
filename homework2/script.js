@@ -149,7 +149,7 @@ if (!regex.test(uname)) {
 
 //password validation js code
 function validatePassword() {
-    const pword = document.getElementById("pword").value;
+    const pass = document.getElementById("pass").value;
     const uname = document.getElementById("uname").value;
 
     //sets up and initializes array
@@ -171,36 +171,21 @@ function validatePassword() {
     }
 
     //check for special characters
-    if (!pword.match(/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/)) {
+    if (!pass.match(/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/)) {
         errorMessage.push("Enter at least one special character.");
     }
 
     //check for username not in password
-    if (pword == uname || pword.includes(uname)) {
+    if (pass == uname || pass.includes(uname)) {
         errorMessage.push("Password cannot contain username.");
     }
 }
 
 //displays error messages if there any errors
-const errorContainer = document.querySelector(".pword-message");
+const errorContainer = document.querySelector(".pass-message");
 errorContainer.innerHTML = errorMessage
     .map((message) => `<span>${message}</span><br/>`)
     .join("");
-
-//password validation js code
-function confirmPassword() {
-    pass = document.getElementById("pass").value;
-
-    if (pass) {
-        document.getElementById("pass-error").innerHTML =
-        "Passwords do not match.";
-        return false;
-    } else {
-        document.getElementById("passs-error").innerHTML =
-        "Passwords match.";
-        return true;
-    }
-}
 
 //display user input back to user (review button)
 function reviewInput() {
