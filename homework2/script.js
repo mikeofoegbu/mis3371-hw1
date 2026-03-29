@@ -187,7 +187,7 @@ errorContainer.innerHTML = errorMessage
     .map((message) => `<span>${message}</span><br/>`)
     .join("");
 
-//confirm password validation js code
+//password validation js code
 function confirmPassword() {
     pass = document.getElementById("pass").value;
 
@@ -196,7 +196,7 @@ function confirmPassword() {
         "Passwords do not match.";
         return false;
     } else {
-        document.getElementById("pword-error").innerHTML =
+        document.getElementById("passs-error").innerHTML =
         "Passwords match.";
         return true;
     }
