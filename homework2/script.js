@@ -180,3 +180,24 @@ function validatePassword() {
         errorMessage.push("Password cannot contain username.");
     }
 }
+
+//displays error messages if there any errors
+const errorContainer = document.querySelector(".pword-message");
+errorContainer.innerHTML = errorMessage
+    .map((message) => `<span>${message}</span><br/>`)
+    .join("");
+
+//confirm password validation js code
+function confirmPassword() {
+    pass = document.getElementById("pass").value;
+
+    if (pass) {
+        document.getElementById("pass-error").innerHTML =
+        "Passwords do not match.";
+        return false;
+    } else {
+        document.getElementById("pword-error").innerHTML =
+        "Passwords match.";
+        return true;
+    }
+}
