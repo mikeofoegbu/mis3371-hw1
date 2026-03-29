@@ -122,3 +122,37 @@ p {
     font-family: var(--ufc-body);
     font-weight: normal;
 }
+.error {
+    color: red;
+    font-size: 12px;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+.pass-message {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+    position: relative;
+    left: 100px;
+    background: transparent;
+    padding: 10px;
+    border-spacing: 2px;
+    border-radius: 20px;
+    color: red;
+}
+
+#review {
+    margin-top: 5px;
+}
+
+table.output,
+tr.output,
+td.output {
+    width: 500px;
+    background-color: rgba(160, 235, 223, 0.442);
+    padding: 10px;
+    border-spacing: 2px;
+    border-radius: 20px;
+    color: black;
+}
