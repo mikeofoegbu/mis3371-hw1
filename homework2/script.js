@@ -127,3 +127,56 @@ function validatePhone() {
     document.getElementById("phone-error").innerHTML = "";
     return true; 
 }  
+
+//checks that username consists of only letters, number, or underscores
+let regex = /^[a-zA-Z0-9_]+$/;
+if (!regex.test(uname)) {
+    document.getElementById("uname-error").innerHTML =
+    "Username can only contain letters, numbers, or underscores.";
+    return false;
+} else if (uname.length < 5) {
+    document.getElementById("uname-error").innerHTML =
+    "Username must be at least 5 characters.";
+    return false;
+} else if (uname.length > 30) { //checks that username does not have more than 30 characters
+    document.getElementById("uname-error").innerHTML =
+    "Username cannot exceed 30 characters.";
+    return false;
+} else { //if all of the above checks pass then username is valid
+    document.getElementById("uname-error").innerHTML = "";
+    return true;
+}
+
+//password validation js code
+function validatePassword() {
+    const pword = document.getElementById("pword").value;
+    const uname = document.getElementById("uname").value;
+
+    //sets up and initializes array
+    const errorMessage = [];
+
+    //check for lowercase letters
+    if (!pword.match(/[a-z]/)) {
+        errorMessage.push("Enter at least one lowercase letter.");
+    }
+
+    //check for uppercase letters
+    if (!pword.match(/[A-Z]/)) {
+        errorMessage.push("Enter at least one uppercase letter.");
+    }
+
+    //check for numbers
+    if (!pword.match(/[0-9]/)) {
+        errorMessage.push("Enter at least one number.");
+    }
+
+    //check for special characters
+    if (!pword.match(/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/)) {
+        errorMessage.push("Enter at least one special character.");
+    }
+
+    //check for username not in password
+    if (pword == uname || pword.includes(uname)) {
+        errorMessage.push("Password cannot contain username.");
+    }
+}
