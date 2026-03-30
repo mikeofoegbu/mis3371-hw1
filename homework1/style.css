@@ -76,7 +76,7 @@ th {
 
 /* footer styling with grey background and full width layout */
 footer {
-    position: flex;
+    display: flex;
     bottom: 0;
     width: 100%;
     background-color: grey;
