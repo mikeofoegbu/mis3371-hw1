@@ -36,7 +36,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
     </header>
 <hr>
 <!-- form begins here-->
-<form action="thankyou.html"> <!-- form sends user to thankyou.html upon successful validation -->
+<form name="signup" id="signup" action="thankyou.html"> <!-- form sends user to thankyou.html upon successful validation -->
       <center>
           <div class="format">
                 <table>
@@ -464,7 +464,7 @@ Purpose: MIS 3371 Homework 2 HTML Form
                                   &nbsp;&nbsp;&nbsp;
                                  <input type="reset" name="reset" id="reset"> 
                                  &nbsp;&nbsp;&nbsp;
-                                 <input type="button" name="review" id="review" value="Review">  
+                                 <input type="button" name="review" id="review" value="Review" onclick="reviewInput()">  
                             </center>
                     </tr>
                 </table>
