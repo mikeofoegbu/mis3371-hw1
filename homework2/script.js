@@ -1,54 +1,129 @@
 /*
 Name: Michael Ofoegbu
-  Date created: 03/20/2026
-  Date last edited: 03/25/2026
-  Purpose: MIS 3371 Homework 1 HTML Form
+Date created: 02/22/2026
+Date last edited: 03/29/2026
+Version: 2.0
+Purpose: MIS 3371 Homework 2 JavaScript - builds on Homework 1 with field-level
+         validation functions, real-time password feedback, and review button output.
 */
 
-//dynamic date js code//
-const d = new Date(); // creates new Date object containing current system date
-let text = d.toLocaleDateString(); // converts date into readable local date format (MM/DD/YYYY)
-document.getElementById("today").innerHTML = text; // inserts formatted date into span element with id="today" in HTML header
+// =====================================================================
+// DYNAMIC DATE
+// runs immediately on page load and inserts today's date into the header
+// =====================================================================
+const d = new Date();
+let text = d.toLocaleDateString();
+document.getElementById("today").innerHTML = text;
 
-//range slider js code//
-let slider = document.getElementById("range") // selects the range input element from the form
-  let output = document.getElementById("range-scale") // selects span element that displays current slider value
-  output.innerHTML = slider.value; // displays default slider value when page first loads
+// =====================================================================
+// RANGE SLIDER
+// displays default slider value on page load and updates it as user slides
+// =====================================================================
+let slider = document.getElementById("range");
+let output = document.getElementById("range-scale");
+output.innerHTML = slider.value; // shows "1" on page load
 
-slider.oninput = function () {output.innerHTML = this.value;}; // updates displayed value dynamically whenever slider is moved
+slider.oninput = function () { output.innerHTML = this.value; }; // updates value as slider moves
 
-// dob validation js code
-function validateDob() {
-    let dob = document.getElementById("dob");
-    let date = new Date(dob.value);
-    let maxDate = new Date().setFullYear(new Date().getFullYear() - 120);
+// =====================================================================
+// FIRST NAME VALIDATION
+// required, 1-30 characters, letters/apostrophes/dashes only
+// =====================================================================
+function validateFname() {
+    const fname = document.getElementById("fname").value.trim();
+    const fnameR = /^[a-zA-Z'\-]{1,30}$/;
 
-    if (date > new Date()) {
-        document.getElementById("dob-error").innerHTML =
-        "Date cannot be in the future.";
-        dob.value="";
+    if (fname === "") {
+        document.getElementById("fname-error").innerHTML = "First name cannot be empty.";
         return false;
-    } else if (date < new Date(maxDate)) {
-        document.getElementById("dob-error").innerHTML =
-        "Date cannot be more than 120 years ago.";
-        dob.value="";
+    } else if (!fnameR.test(fname)) {
+        document.getElementById("fname-error").innerHTML = "Letters, apostrophes, and dashes only.";
         return false;
     } else {
-        document.getElementById("dob-error").innerHTML = "";
-        return true
+        document.getElementById("fname-error").innerHTML = "";
+        return true;
     }
 }
 
-// ssn validation js code
+// =====================================================================
+// MIDDLE INITIAL VALIDATION
+// optional, but if entered must be a single letter
+// =====================================================================
+function validateMini() {
+    const mini = document.getElementById("mini").value.trim();
+    const miniR = /^[a-zA-Z]{0,1}$/;
+
+    if (!miniR.test(mini)) {
+        document.getElementById("mini-error").innerHTML = "Middle initial must be a single letter.";
+        return false;
+    } else {
+        document.getElementById("mini-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// LAST NAME VALIDATION
+// required, 1-30 characters, letters/apostrophes/dashes only
+// =====================================================================
+function validateLname() {
+    const lname = document.getElementById("lname").value.trim();
+    const lnameR = /^[a-zA-Z'\-]{1,30}$/;
+
+    if (lname === "") {
+        document.getElementById("lname-error").innerHTML = "Last name cannot be empty.";
+        return false;
+    } else if (!lnameR.test(lname)) {
+        document.getElementById("lname-error").innerHTML = "Letters, apostrophes, and dashes only.";
+        return false;
+    } else {
+        document.getElementById("lname-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// DATE OF BIRTH VALIDATION
+// required, cannot be in the future, cannot be more than 120 years ago
+// min and max dates calculated dynamically based on today's date
+// =====================================================================
+function validateDob() {
+    const dobInput = document.getElementById("dob");
+    const dob = new Date(dobInput.value);
+    const today = new Date();
+    const maxAge = new Date();
+    maxAge.setFullYear(today.getFullYear() - 120); // 120 years ago from today
+
+    if (!dobInput.value) {
+        document.getElementById("dob-error").innerHTML = "Date of birth cannot be empty.";
+        return false;
+    } else if (dob > today) {
+        document.getElementById("dob-error").innerHTML = "Date of birth cannot be in the future.";
+        dobInput.value = "";
+        return false;
+    } else if (dob < maxAge) {
+        document.getElementById("dob-error").innerHTML = "Date of birth cannot be more than 120 years ago.";
+        dobInput.value = "";
+        return false;
+    } else {
+        document.getElementById("dob-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// SSN VALIDATION
+// required, must match format XXX-XX-XXXX (dashes optional)
+// =====================================================================
 function validateSsn() {
     const ssn = document.getElementById("ssn").value;
-
-    // regex for ssn pattern thing
     const ssnR = /^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
 
-    if (!ssnR.test(ssn)) {
-        document.getElementById("ssn-error").innerHTML =
-        "Please enter a valid Social Security Number.";
+    if (!ssn) {
+        document.getElementById("ssn-error").innerHTML = "SSN cannot be empty.";
+        return false;
+    } else if (!ssnR.test(ssn)) {
+        document.getElementById("ssn-error").innerHTML = "Please enter a valid SSN in the format: XXX-XX-XXXX.";
         return false;
     } else {
         document.getElementById("ssn-error").innerHTML = "";
@@ -56,15 +131,15 @@ function validateSsn() {
     }
 }
 
-// address 1 validation js code  
+// =====================================================================
+// ADDRESS LINE 1 VALIDATION
+// required, 2 to 30 characters
+// =====================================================================
 function validateAddress1() {
-    var ad1 = document.getElementById("address1").value;
-    console.log(ad1);
-    console.log(ad1.length);
+    const ad1 = document.getElementById("address1").value.trim();
 
     if (ad1.length < 2) {
-        document.getElementById("address1-error").innerHTML =
-        "Please enter something on address line";
+        document.getElementById("address1-error").innerHTML = "Address must be at least 2 characters.";
         return false;
     } else {
         document.getElementById("address1-error").innerHTML = "";
@@ -72,38 +147,101 @@ function validateAddress1() {
     }
 }
 
-// zip code validation js code
+// =====================================================================
+// ADDRESS LINE 2 VALIDATION
+// optional, but if entered must be 2 to 30 characters
+// =====================================================================
+function validateAddress2() {
+    const ad2 = document.getElementById("address2").value.trim();
+
+    if (ad2.length > 0 && ad2.length < 2) {
+        document.getElementById("address2-error").innerHTML = "Apt/Suite must be at least 2 characters if entered.";
+        return false;
+    } else {
+        document.getElementById("address2-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// CITY VALIDATION
+// required, 2 to 30 characters
+// =====================================================================
+function validateCity() {
+    const city = document.getElementById("city").value.trim();
+
+    if (city.length < 2) {
+        document.getElementById("city-error").innerHTML = "City must be at least 2 characters.";
+        return false;
+    } else {
+        document.getElementById("city-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// STATE VALIDATION
+// required, user must select a valid state from the dropdown
+// =====================================================================
+function validateState() {
+    const state = document.getElementById("state").value;
+
+    if (!state) {
+        document.getElementById("state-error").innerHTML = "Please select a state.";
+        return false;
+    } else {
+        document.getElementById("state-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// ZIP CODE VALIDATION
+// required, accepts 5-digit or zip+4 format (e.g. 77002-1234)
+// truncates to first 5 digits and redisplays the corrected value
+// =====================================================================
 function validateZip() {
     const zipInput = document.getElementById("zip");
-    let zip = zipInput.value.replace(/[^\d-]/g, ""); // removes any non-number and non-dash characters
+    let zip = zipInput.value.trim();
 
     if (!zip) {
-        document.getElementById("zip-error").innerHTML =
-        "Zip code cannot be left blank.";
+        document.getElementById("zip-error").innerHTML = "Zip code cannot be empty.";
         return false;
     }
 
-    if (zip.length > 5) {
-        zip = zip.slice(0,5); // removes all digits after first 5
+    // strip everything except digits and dash
+    zip = zip.replace(/[^\d-]/g, "");
+
+    // truncate to first 5 digits if longer than 5
+    const digitsOnly = zip.replace(/-/g, "");
+    if (digitsOnly.length > 5) {
+        zip = digitsOnly.slice(0, 5);
     }
 
-    zipInput.value = zip;
+    // validate: must be exactly 5 digits after truncation
+    if (!/^[0-9]{5}$/.test(zip)) {
+        document.getElementById("zip-error").innerHTML = "Please enter a valid 5-digit zip code.";
+        return false;
+    }
+
+    zipInput.value = zip; // redisplay truncated value
     document.getElementById("zip-error").innerHTML = "";
     return true;
 }
 
-// email validation js code
+// =====================================================================
+// EMAIL VALIDATION
+// required, must match format name@domain.tld
+// =====================================================================
 function validateEmail() {
-    let email = document.getElementById("email").value;
-    var emailR = /^\w+(([.-]?\w+)*)@\w+(([.-]?\w+)*)\.\w{2,3}+$/; //regex pattern thing for email
+    const email = document.getElementById("email").value.trim();
+    const emailR = /^\w+(([.\-]?\w+)*)@\w+(([.\-]?\w+)*)\.\w{2,20}$/;
 
-    if (email =="") {
-        document.getElementById("email-error").innerHTML =
-        "Email cannot be empty.";
+    if (email === "") {
+        document.getElementById("email-error").innerHTML = "Email address cannot be empty.";
         return false;
-    } else if (!email.match(emailR)) {
-        document.getElementById("email-error").innerHTML =
-        "Please enter a valid email address.";
+    } else if (!emailR.test(email)) {
+        document.getElementById("email-error").innerHTML = "Please enter a valid email address (e.g. name@domain.com).";
         return false;
     } else {
         document.getElementById("email-error").innerHTML = "";
@@ -111,126 +249,195 @@ function validateEmail() {
     }
 }
 
-// phone number validation js code
+// =====================================================================
+// PHONE NUMBER VALIDATION
+// required, must be 10 digits, auto-formatted to XXX-XXX-XXXX on blur
+// =====================================================================
 function validatePhone() {
     const phoneInput = document.getElementById("phone");
-    const phone = phoneInput.value.replace(/\D/g, ""); //removes all non-number characters
+    const phone = phoneInput.value.replace(/\D/g, ""); // strip all non-digits
 
-    if (phone.length !== 0) {
-        document.getElementById("phone-error");innerHTML
-        "Phone number cannot be left blank.";
+    if (phone.length === 0) {
+        document.getElementById("phone-error").innerHTML = "Phone number cannot be empty.";
+        return false;
+    } else if (phone.length !== 10) {
+        document.getElementById("phone-error").innerHTML = "Please enter a valid 10-digit phone number (e.g. 123-456-7890).";
+        return false;
+    } else {
+        // auto-format to XXX-XXX-XXXX and redisplay
+        phoneInput.value = phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6, 10);
+        document.getElementById("phone-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// USERNAME VALIDATION
+// required, 5-15 characters, letters/numbers/underscores only
+// cannot start with a number, no spaces, converted to lowercase on blur
+// =====================================================================
+function validateUname() {
+    const unameInput = document.getElementById("uname");
+    const uname = unameInput.value.trim();
+    const unameR = /^[a-zA-Z_][a-zA-Z0-9_]{4,14}$/; // must start with letter or underscore, 5-15 chars total
+
+    if (uname === "") {
+        document.getElementById("uname-error").innerHTML = "Username cannot be empty.";
+        return false;
+    } else if (/^\d/.test(uname)) {
+        document.getElementById("uname-error").innerHTML = "Username cannot start with a number.";
+        return false;
+    } else if (uname.includes(" ")) {
+        document.getElementById("uname-error").innerHTML = "Username cannot contain spaces.";
+        return false;
+    } else if (!unameR.test(uname)) {
+        document.getElementById("uname-error").innerHTML = "5 to 15 characters. Letters, numbers, and underscores only.";
+        return false;
+    } else {
+        unameInput.value = uname.toLowerCase(); // convert to lowercase and redisplay
+        document.getElementById("uname-error").innerHTML = "";
+        return true;
+    }
+}
+
+// =====================================================================
+// PASSWORD VALIDATION
+// required, 10-30 characters
+// must have: 1 uppercase, 1 lowercase, 1 number, 1 special character
+// cannot contain the username
+// no double quotes allowed
+// displays real-time feedback messages as user types
+// =====================================================================
+function validatePass() {
+    const pass = document.getElementById("pass").value;
+    const uname = document.getElementById("uname").value.toLowerCase();
+    const messages = [];
+
+    // check minimum length
+    if (pass.length < 10) {
+        messages.push("Must be at least 10 characters.");
+    }
+
+    // check for lowercase letter
+    if (!/[a-z]/.test(pass)) {
+        messages.push("Must contain at least one lowercase letter.");
+    }
+
+    // check for uppercase letter
+    if (!/[A-Z]/.test(pass)) {
+        messages.push("Must contain at least one uppercase letter.");
+    }
+
+    // check for number
+    if (!/[0-9]/.test(pass)) {
+        messages.push("Must contain at least one number.");
+    }
+
+    // check for special character (double quotes not allowed)
+    if (!/[!@#$%^&*()\-_+=\[\]{};':\\|,.<>\/?`~]/.test(pass)) {
+        messages.push('Must contain at least one special character (e.g. !@#$%). Double quotes not allowed.');
+    }
+
+    // check double quotes not present
+    if (pass.includes('"')) {
+        messages.push('Double quotes (") are not allowed in the password.');
+    }
+
+    // check password does not contain username
+    if (uname.length > 0 && pass.toLowerCase().includes(uname)) {
+        messages.push("Password cannot contain your username.");
+    }
+
+    // display messages or clear them
+    const msgSpans = ["msg1", "msg2", "msg3", "msg4", "msg5"];
+    msgSpans.forEach(function(id) {
+        document.getElementById(id).innerHTML = "";
+    });
+
+    messages.forEach(function(msg, index) {
+        if (index < msgSpans.length) {
+            document.getElementById(msgSpans[index]).innerHTML = msg;
+        }
+    });
+
+    if (messages.length === 0) {
+        document.getElementById("pass-error").innerHTML = "";
+        return true;
+    } else {
+        document.getElementById("pass-error").innerHTML = "Please fix the password issues above.";
         return false;
     }
-
-    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6,10)
-    phoneInput.value = formattedPhone;
-    document.getElementById("phone-error").innerHTML = "";
-    return true; 
-}  
-
-//checks that username consists of only letters, number, or underscores
-let regex = /^[a-zA-Z0-9_]+$/;
-if (!regex.test(uname)) {
-    document.getElementById("uname-error").innerHTML =
-    "Username can only contain letters, numbers, or underscores.";
-    return false;
-} else if (uname.length < 5) {
-    document.getElementById("uname-error").innerHTML =
-    "Username must be at least 5 characters.";
-    return false;
-} else if (uname.length > 30) { //checks that username does not have more than 30 characters
-    document.getElementById("uname-error").innerHTML =
-    "Username cannot exceed 30 characters.";
-    return false;
-} else { //if all of the above checks pass then username is valid
-    document.getElementById("uname-error").innerHTML = "";
-    return true;
 }
 
-//password validation js code
-function validatePassword() {
+// =====================================================================
+// CONFIRM PASSWORD VALIDATION
+// must match the password field exactly
+// =====================================================================
+function validatePass2() {
     const pass = document.getElementById("pass").value;
-    const uname = document.getElementById("uname").value;
+    const pass2 = document.getElementById("pass2").value;
 
-    //sets up and initializes array
-    const errorMessage = [];
-
-    //check for lowercase letters
-    if (!pword.match(/[a-z]/)) {
-        errorMessage.push("Enter at least one lowercase letter.");
-    }
-
-    //check for uppercase letters
-    if (!pword.match(/[A-Z]/)) {
-        errorMessage.push("Enter at least one uppercase letter.");
-    }
-
-    //check for numbers
-    if (!pword.match(/[0-9]/)) {
-        errorMessage.push("Enter at least one number.");
-    }
-
-    //check for special characters
-    if (!pass.match(/[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]/)) {
-        errorMessage.push("Enter at least one special character.");
-    }
-
-    //check for username not in password
-    if (pass == uname || pass.includes(uname)) {
-        errorMessage.push("Password cannot contain username.");
+    if (pass2 === "") {
+        document.getElementById("pass2-error").innerHTML = "Please re-enter your password.";
+        return false;
+    } else if (pass !== pass2) {
+        document.getElementById("pass2-error").innerHTML = "Passwords do not match.";
+        return false;
+    } else {
+        document.getElementById("pass2-error").innerHTML = "";
+        return true;
     }
 }
 
-//displays error messages if there any errors
-const errorContainer = document.querySelector(".pass-message");
-errorContainer.innerHTML = errorMessage
-    .map((message) => `<span>${message}</span><br/>`)
-    .join("");
-
-//display user input back to user (review button)
+// =====================================================================
+// REVIEW BUTTON - redisplays all entered form data below the form
+// loops through all form elements and builds an output table
+// skips buttons, empty fields, and unchecked boxes/radios
+// =====================================================================
 function reviewInput() {
-    var formcontent = document.getElementById("signup");
-    var formoutput;
-    var i;
-    formoutput = "<table class='output'><th colspan = '3'>Your Information:</th>";
+    const formcontent = document.getElementById("signup");
+    let formoutput = "<table class='output'><tr><th colspan='3'>Your Information:</th></tr>";
 
-    for (i = 0; i < formcontent.length; i++) {
-        if (formcontent.elements[i].value != "") {
-            datatype = formcontent.elements[i].type;
+    for (let i = 0; i < formcontent.length; i++) {
+        const el = formcontent.elements[i];
+        const datatype = el.type;
+
+        if (el.value !== "") {
             switch (datatype) {
                 case "checkbox":
-                    if (formcontent.elements[i].checked) {
-                        formoutput = formoutput + "<tr><td align='right'>" + formcontent.elements[i].name + "</td>";
-                        formoutput = formoutput + "<td class='outputdata'>&#x2713;</td></tr>";
+                    if (el.checked) {
+                        formoutput += "<tr><td align='right'>" + el.name + "</td>";
+                        formoutput += "<td class='outputdata'>&#x2713;</td></tr>";
                     }
                     break;
 
                 case "radio":
-                    if (formcontent.elements[i].checked) {
-                        formoutput = formoutput + "<tr><td align='right'>" + formcontent.elements[i].name + "</td>";
-                        formoutput = formoutput + "<td class='outputdata'>" + formcontent.elements[i].value + "</td></tr>";
+                    if (el.checked) {
+                        formoutput += "<tr><td align='right'>" + el.name + "</td>";
+                        formoutput += "<td class='outputdata'>" + el.value + "</td></tr>";
                     }
                     break;
 
+                case "password":
                 case "button":
                 case "submit":
                 case "reset":
-                    break;
+                    break; // skip passwords and buttons from review display
 
                 default:
-                    formoutput = formoutput + "<tr><td align='right'>" + formcontent.elements[i].name + "</td>";
-                    formoutput = formoutput + "<td class='outputdata'>" + formcontent.elements[i].value + "</td></tr>";
+                    formoutput += "<tr><td align='right'>" + el.name + "</td>";
+                    formoutput += "<td class='outputdata'>" + el.value + "</td></tr>";
             }
         }
     }
 
-    if (formoutput.length > 0) {
-        formoutput = formoutput + "</table>";
-        document.getElementById("showInput").innerHTML = formoutput;
-    }
+    formoutput += "</table>";
+    document.getElementById("showInput").innerHTML = formoutput;
 }
 
-//remove user input
+// =====================================================================
+// REMOVE REVIEW - clears the review output area
+// =====================================================================
 function removeReview() {
     document.getElementById("showInput").innerHTML = "";
 }
