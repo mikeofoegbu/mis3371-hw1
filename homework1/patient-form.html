@@ -2,7 +2,8 @@
 <!--
 Name: Michael Ofoegbu
 Date created: 02/22/2026
-Date last edited: 03/02/2026
+Date last edited: 03/29/2026
+Version: 1.1
 Purpose: MIS 3371 Homework 1 HTML Form
 -->
 <html lang="en">
@@ -166,7 +167,6 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=address2>Apt/Suite #:</label></td>
                         <td>
-                            <!-- dropdown menu containing all U.S. states -->
                             <input
                               type="text"
                               name="address2"
@@ -196,7 +196,8 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for="state">State:</label></td>
                         <td>
-                          <select>
+                          <!-- added name and id attributes so state field submits correctly with the form -->
+                          <select name="state" id="state">
                             <option selected disabled>Please Select One</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
@@ -237,6 +238,7 @@ Purpose: MIS 3371 Homework 1 HTML Form
                             <option value="OK">Oklahoma</option>
                             <option value="OR">Oregon</option>
                             <option value="PA">Pennsylvania</option>
+                            <option value="PR">Puerto Rico</option>
                             <option value="RI">Rhode Island</option>
                             <option value="SC">South Carolina</option>
                             <option value="SD">South Dakota</option>
@@ -274,8 +276,9 @@ Purpose: MIS 3371 Homework 1 HTML Form
                     <tr>
                         <td class="td1"><label for=email>Email Address:</label></td>
                         <td>
+                            <!-- changed to type="email" for proper browser-level format validation -->
                             <input
-                              type="text"
+                              type="email"
                               name="email"
                               id="email"
                               required
@@ -311,6 +314,50 @@ Purpose: MIS 3371 Homework 1 HTML Form
                         <th colspan="4">Patient's History</th>
                     </tr>
 
+                    <!-- radio button set 2: insurance -->
+                    <tr>
+                          <td class="td1"><label>Do you have insurance?</label></td>
+                          <td>
+                              <input
+                                type="radio"
+                                id="ins_yes"
+                                name="insurance"
+                                value="Yes"
+                                />
+                                Yes
+
+                              <input
+                                type="radio"
+                                id="ins_no"
+                                name="insurance"
+                                value="No"
+                                />
+                                No
+                          </td>
+                    </tr>
+
+                    <!-- radio button set 3: vaccinated -->
+                    <tr>
+                          <td class="td1"><label>Have you been vaccinated?</label></td>
+                          <td>
+                              <input
+                                type="radio"
+                                id="vax_yes"
+                                name="vaccinated"
+                                value="Yes"
+                                />
+                                Yes
+
+                              <input
+                                type="radio"
+                                id="vax_no"
+                                name="vaccinated"
+                                value="No"
+                                />
+                                No
+                          </td>
+                    </tr>
+
                     <tr>
                         <td class="td1"><label for=pat_hist>Have you ever had/are you currently experiencing?</label></td>
                         <td>
@@ -336,15 +383,18 @@ Purpose: MIS 3371 Homework 1 HTML Form
                             <input type="checkbox" id="other" name="history" value="Other">
                             <label for="other">Other</label><br>
                         </td>
+                    </tr> <!-- closed missing closing tr tag -->
+
                     <tr>
                         <td class="td1" align="right">
                             <label for="notes">If you selected any of the above, please explain:</label>
                         </td>
                         <td>
                             <!-- textarea allows user to provide additional explanation of symptoms -->
+                            <!-- updated cols from 40 to 50 to meet rubric minimum of 50 columns -->
                             <textarea
                               rows="4"
-                              cols="40"
+                              cols="50"
                               maxlength="500"
                               id="notes"
                               name="notes"
@@ -409,6 +459,23 @@ Purpose: MIS 3371 Homework 1 HTML Form
                               maxlength="30"
                               required
                               title="Please eneter your password"
+                              placeholder="Required"
+                              />
+                        </td>
+                    </tr>
+
+                    <!-- added confirm password field as required by rubric -->
+                    <tr>
+                        <td class="td1"><label for="pass2">Re-enter Password:</label></td>
+                        <td>
+                            <input
+                              type="password"
+                              name="pass2"
+                              id="pass2"
+                              minlength="10"
+                              maxlength="30"
+                              required
+                              title="Please re-enter your password"
                               placeholder="Required"
                               />
                         </td>
