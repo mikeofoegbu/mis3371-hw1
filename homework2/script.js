@@ -7,28 +7,22 @@ Purpose: MIS 3371 Homework 2 JavaScript - builds on Homework 1 with field-level
          validation functions, real-time password feedback, and review button output.
 */
 
-// =====================================================================
 // DYNAMIC DATE
 // runs immediately on page load and inserts today's date into the header
-// =====================================================================
 const d = new Date();
 let text = d.toLocaleDateString();
 document.getElementById("today").innerHTML = text;
 
-// =====================================================================
 // RANGE SLIDER
 // displays default slider value on page load and updates it as user slides
-// =====================================================================
 let slider = document.getElementById("range");
 let output = document.getElementById("range-scale");
 output.innerHTML = slider.value; // shows "1" on page load
 
 slider.oninput = function () { output.innerHTML = this.value; }; // updates value as slider moves
 
-// =====================================================================
 // FIRST NAME VALIDATION
 // required, 1-30 characters, letters/apostrophes/dashes only
-// =====================================================================
 function validateFname() {
     const fname = document.getElementById("fname").value.trim();
     const fnameR = /^[a-zA-Z'\-]{1,30}$/;
@@ -45,10 +39,8 @@ function validateFname() {
     }
 }
 
-// =====================================================================
 // MIDDLE INITIAL VALIDATION
 // optional, but if entered must be a single letter
-// =====================================================================
 function validateMini() {
     const mini = document.getElementById("mini").value.trim();
     const miniR = /^[a-zA-Z]{0,1}$/;
@@ -62,10 +54,8 @@ function validateMini() {
     }
 }
 
-// =====================================================================
 // LAST NAME VALIDATION
 // required, 1-30 characters, letters/apostrophes/dashes only
-// =====================================================================
 function validateLname() {
     const lname = document.getElementById("lname").value.trim();
     const lnameR = /^[a-zA-Z'\-]{1,30}$/;
@@ -82,11 +72,9 @@ function validateLname() {
     }
 }
 
-// =====================================================================
 // DATE OF BIRTH VALIDATION
 // required, cannot be in the future, cannot be more than 120 years ago
 // min and max dates calculated dynamically based on today's date
-// =====================================================================
 function validateDob() {
     const dobInput = document.getElementById("dob");
     const dob = new Date(dobInput.value);
@@ -111,10 +99,8 @@ function validateDob() {
     }
 }
 
-// =====================================================================
 // SSN VALIDATION
 // required, must match format XXX-XX-XXXX (dashes optional)
-// =====================================================================
 function validateSsn() {
     const ssn = document.getElementById("ssn").value;
     const ssnR = /^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
@@ -131,10 +117,8 @@ function validateSsn() {
     }
 }
 
-// =====================================================================
 // ADDRESS LINE 1 VALIDATION
 // required, 2 to 30 characters
-// =====================================================================
 function validateAddress1() {
     const ad1 = document.getElementById("address1").value.trim();
 
@@ -147,10 +131,8 @@ function validateAddress1() {
     }
 }
 
-// =====================================================================
 // ADDRESS LINE 2 VALIDATION
 // optional, but if entered must be 2 to 30 characters
-// =====================================================================
 function validateAddress2() {
     const ad2 = document.getElementById("address2").value.trim();
 
@@ -163,10 +145,8 @@ function validateAddress2() {
     }
 }
 
-// =====================================================================
 // CITY VALIDATION
 // required, 2 to 30 characters
-// =====================================================================
 function validateCity() {
     const city = document.getElementById("city").value.trim();
 
@@ -179,10 +159,8 @@ function validateCity() {
     }
 }
 
-// =====================================================================
 // STATE VALIDATION
 // required, user must select a valid state from the dropdown
-// =====================================================================
 function validateState() {
     const state = document.getElementById("state").value;
 
@@ -195,11 +173,9 @@ function validateState() {
     }
 }
 
-// =====================================================================
 // ZIP CODE VALIDATION
 // required, accepts 5-digit or zip+4 format (e.g. 77002-1234)
 // truncates to first 5 digits and redisplays the corrected value
-// =====================================================================
 function validateZip() {
     const zipInput = document.getElementById("zip");
     let zip = zipInput.value.trim();
@@ -229,10 +205,8 @@ function validateZip() {
     return true;
 }
 
-// =====================================================================
 // EMAIL VALIDATION
 // required, must match format name@domain.tld
-// =====================================================================
 function validateEmail() {
     const email = document.getElementById("email").value.trim();
     const emailR = /^\w+(([.\-]?\w+)*)@\w+(([.\-]?\w+)*)\.\w{2,20}$/;
@@ -249,10 +223,8 @@ function validateEmail() {
     }
 }
 
-// =====================================================================
 // PHONE NUMBER VALIDATION
 // required, must be 10 digits, auto-formatted to XXX-XXX-XXXX on blur
-// =====================================================================
 function validatePhone() {
     const phoneInput = document.getElementById("phone");
     const phone = phoneInput.value.replace(/\D/g, ""); // strip all non-digits
@@ -271,11 +243,9 @@ function validatePhone() {
     }
 }
 
-// =====================================================================
 // USERNAME VALIDATION
 // required, 5-15 characters, letters/numbers/underscores only
 // cannot start with a number, no spaces, converted to lowercase on blur
-// =====================================================================
 function validateUname() {
     const unameInput = document.getElementById("uname");
     const uname = unameInput.value.trim();
@@ -300,14 +270,12 @@ function validateUname() {
     }
 }
 
-// =====================================================================
 // PASSWORD VALIDATION
 // required, 10-30 characters
 // must have: 1 uppercase, 1 lowercase, 1 number, 1 special character
 // cannot contain the username
 // no double quotes allowed
 // displays real-time feedback messages as user types
-// =====================================================================
 function validatePass() {
     const pass = document.getElementById("pass").value;
     const uname = document.getElementById("uname").value.toLowerCase();
@@ -369,10 +337,8 @@ function validatePass() {
     }
 }
 
-// =====================================================================
 // CONFIRM PASSWORD VALIDATION
 // must match the password field exactly
-// =====================================================================
 function validatePass2() {
     const pass = document.getElementById("pass").value;
     const pass2 = document.getElementById("pass2").value;
@@ -389,11 +355,9 @@ function validatePass2() {
     }
 }
 
-// =====================================================================
 // REVIEW BUTTON - redisplays all entered form data below the form
 // loops through all form elements and builds an output table
 // skips buttons, empty fields, and unchecked boxes/radios
-// =====================================================================
 function reviewInput() {
     const formcontent = document.getElementById("signup");
     let formoutput = "<table class='output'><tr><th colspan='3'>Your Information:</th></tr>";
@@ -435,9 +399,7 @@ function reviewInput() {
     document.getElementById("showInput").innerHTML = formoutput;
 }
 
-// =====================================================================
 // REMOVE REVIEW - clears the review output area
-// =====================================================================
 function removeReview() {
     document.getElementById("showInput").innerHTML = "";
 }
