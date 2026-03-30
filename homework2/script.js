@@ -122,7 +122,7 @@ function validatePhone() {
         return false;
     }
 
-    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6)
+    const formattedPhone = phone.slice(0,3) + "-" + phone.slice(3,6) + "-" + phone.slice(6,10)
     phoneInput.value = formattedPhone;
     document.getElementById("phone-error").innerHTML = "";
     return true; 
