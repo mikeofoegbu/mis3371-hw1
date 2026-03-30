@@ -1,8 +1,10 @@
 /*
 Name: Michael Ofoegbu
-Date created: 03/20/2026
-Date last edited: 03/25/2026
-Purpose: MIS 3371 Homework 2 HTML Form
+Date created: 02/22/2026
+Date last edited: 03/29/2026
+Version: 2.0
+Purpose: MIS 3371 Homework 2 CSS Stylesheet - builds on Homework 1 styles with
+         additional rules for error messages, password feedback, and review output table.
 */
 
 /* UFC-style font variables using system fonts only */
@@ -76,11 +78,11 @@ th {
 
 /* footer styling with grey background and full width layout */
 footer {
-    position: flex;
+    display: flex;
     bottom: 0;
     width: 100%;
     background-color: grey;
-    height: 2.5 rem;
+    height: 2.5rem;
 }
 
 /* styles paragraph inside footer */
