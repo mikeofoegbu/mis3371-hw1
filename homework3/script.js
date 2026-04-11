@@ -3,7 +3,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/11/2026
 Version: 3.0
-Purpose: MIS 3371 Homework 3 JavaScript
+Purpose: MIS 3371 Homework 3 JavaScript - builds on Homework 2 with a validateEverything()
+         function that gates form submission behind a full JS validation sweep.
 */
 
 // DYNAMIC DATE
@@ -21,43 +22,41 @@ output.innerHTML = slider.value; // shows "1" on page load
 slider.oninput = function () { output.innerHTML = this.value; }; // updates value as slider moves
 
 // FIRST NAME VALIDATION
+// required, 1-30 characters, letters/apostrophes/dashes only
 function validateFname() {
-    fname = document.getElementById("fname").value.trim();
-    var namePattern = /^[a-zA-Z'-]+$/;
-    //checks if first name field is empty
-    if (fname == "") {
-        document.getElementById("fname-error").innerHTML = "First name field cannot be empty.";
+    const fname = document.getElementById("fname").value.trim();
+    const fnameR = /^[a-zA-Z'\-]{1,30}$/;
+
+    if (fname === "") {
+        document.getElementById("fname-error").innerHTML = "First name cannot be empty.";
         return false;
-    } else if (fname != "") {
-        if (!fname.match(namePattern)) {  //checks if first name matches pattern
+    } else if (!fnameR.test(fname)) {
         document.getElementById("fname-error").innerHTML = "Letters, apostrophes, and dashes only.";
-        return false;
-    } else if (fname.length < 2) { //checks if name is at least 1 character
-        document.getElementById("fname-error").innerHTML = "First name cannot be less than 2 characters.";
-        return false;
-    } else if (fname.length > 30) { //checks if name is more than 30 characters
-        document.getElementById("fname-error").innerHTML = "First name cannot be more than 30 characters.";
         return false;
     } else {
         document.getElementById("fname-error").innerHTML = "";
         return true;
     }
-  }
-}    
+}
 
 // MIDDLE INITIAL VALIDATION
-/* Check if middle initial is valid */
+// optional, but if entered must be a single letter
+// converts to uppercase and redisplays on blur
 function validateMini() {
-    let mini = document.getElementById("mini").value;
-    const namePattern = /^[A-Z]$/;
+    const miniInput = document.getElementById("mini");
+    let mini = miniInput.value.trim();
 
-    // Convert middle initial to uppercase
+    if (mini === "") {
+        document.getElementById("mini-error").innerHTML = "";
+        return true; // field is optional, blank is fine
+    }
+
     mini = mini.toUpperCase();
-    document.getElementById("mini").value = mini;
+    miniInput.value = mini; // redisplay as uppercase
 
-    // Check that middle initial is exactly one uppercase letter
-    if (!mini.match(namePattern)) {
-        document.getElementById("mini-error").innerHTML = "Middle initial must be a single uppercase letter.";
+    const miniR = /^[A-Z]$/;
+    if (!miniR.test(mini)) {
+        document.getElementById("mini-error").innerHTML = "Middle initial must be a single letter.";
         return false;
     } else {
         document.getElementById("mini-error").innerHTML = "";
@@ -66,28 +65,21 @@ function validateMini() {
 }
 
 // LAST NAME VALIDATION
-function validateFname() {
-    lname = document.getElementById("lname").value.trim();
-    var namePattern = /^[a-zA-Z'-]+$/;
-    //checks if last name field is empty
-    if (lname == "") {
-        document.getElementById("lname-error").innerHTML = "Last name field cannot be empty.";
+// required, 1-30 characters, letters/apostrophes/dashes only
+function validateLname() {
+    const lname = document.getElementById("lname").value.trim();
+    const lnameR = /^[a-zA-Z'\-]{1,30}$/;
+
+    if (lname === "") {
+        document.getElementById("lname-error").innerHTML = "Last name cannot be empty.";
         return false;
-    } else if (lname != "") {
-        if (!lname.match(namePattern)) {  //checks if last name matches pattern
+    } else if (!lnameR.test(lname)) {
         document.getElementById("lname-error").innerHTML = "Letters, apostrophes, and dashes only.";
-        return false;
-    } else if (lname.length < 2) { //checks if name is at least 1 character
-        document.getElementById("lname-error").innerHTML = "Last name cannot be less than 2 characters.";
-        return false;
-    } else if (lname.length > 30) { //checks if name is more than 30 characters
-        document.getElementById("lname-error").innerHTML = "Last name cannot be more than 30 characters.";
         return false;
     } else {
         document.getElementById("lname-error").innerHTML = "";
         return true;
     }
-  }
 }
 
 // DATE OF BIRTH VALIDATION
@@ -373,9 +365,54 @@ function validatePass2() {
     }
 }
 
-// REVIEW BUTTON - redisplays all entered form data below the form
+// VALIDATE EVERYTHING
+// called when the Validate button is pressed
+// runs every validation function across the form
+// if all pass, enables the Submit button
+// if any fail, shows the alert box and keeps Submit disabled
+function validateEverything() {
+    let valid = true;
+
+    if (!validateFname()) { valid = false; }
+    if (!validateMini()) { valid = false; }
+    if (!validateLname()) { valid = false; }
+    if (!validateDob()) { valid = false; }
+    if (!validateSsn()) { valid = false; }
+    if (!validateAddress1()) { valid = false; }
+    if (!validateAddress2()) { valid = false; }
+    if (!validateCity()) { valid = false; }
+    if (!validateState()) { valid = false; }
+    if (!validateZip()) { valid = false; }
+    if (!validateEmail()) { valid = false; }
+    if (!validatePhone()) { valid = false; }
+    if (!validateUname()) { valid = false; }
+    if (!validatePass()) { valid = false; }
+    if (!validatePass2()) { valid = false; }
+
+    if (valid) {
+        document.getElementById("submit").disabled = false; // unlock submit button
+    } else {
+        document.getElementById("submit").disabled = true; // keep submit locked
+        showAlert(); // show the alert box
+    }
+}
+
+// ALERT BOX
+// shows alert box when Validate is pressed and errors are still present
+function showAlert() {
+    var alertBox = document.getElementById("alert-box");
+    var closeAlert = document.getElementById("close-alert");
+
+    alertBox.style.display = "block";
+    closeAlert.onclick = function () {
+        alertBox.style.display = "none";
+    };
+}
+
+// REVIEW BUTTON
+// redisplays all entered form data below the form
 // loops through all form elements and builds an output table
-// skips buttons, empty fields, and unchecked boxes/radios
+// skips buttons, passwords, empty fields, and unchecked boxes/radios
 function reviewInput() {
     const formcontent = document.getElementById("signup");
     let formoutput = "<table class='output'><tr><th colspan='3'>Your Information:</th></tr>";
@@ -417,68 +454,8 @@ function reviewInput() {
     document.getElementById("showInput").innerHTML = formoutput;
 }
 
-// REMOVE REVIEW - clears the review output area
+// REMOVE REVIEW
+// clears the review output area
 function removeReview() {
     document.getElementById("showInput").innerHTML = "";
-}
-
-// Alert Box - shows alert box when neccesary
-function showAlert() {
-    var alertBox = document.getElementById("alert-box");
-    var closeAlert = document.getElementById("close-alert");
-
-    alertBox.style.display = "block";
-    closeAlert.onclick = function () {
-        alertBox.style.display = "none";
-    }
-}
-
-// validate everything on form
-function validateEverything() {
-    let valid = true;
-
-        if (!validateFname()) {
-        valid = false;
-    }
-    if (!validateMini()) {
-        valid = false;
-    }
-    if (!validateLname()) {
-        valid = false;
-    }
-    if (!validateDob()) {
-        valid = false;
-    }
-    if (!validateSsn()) {
-        valid = false;
-    }
-    if (!validateAddress1()) {
-        valid = false;
-    }
-    if (!validateCity()) {
-        valid = false;
-    }
-    if (!validateZcode()) {
-        valid = false;
-    }
-    if (!validateEmail()) {
-        valid = false;
-    }
-    if (!validatePhone()) {
-        valid = false;
-    }
-    if (!validateUname()) {
-        valid = false;
-    }
-    if (!validatePassword()) {
-        valid = false;
-    }
-    if (!confirmPassword()) {
-        valid = false;
-    }
-    if (valid)
-		document.getElementById("submit").disabled = false;
-	} else {
-        showAlert();
-    }
 }
