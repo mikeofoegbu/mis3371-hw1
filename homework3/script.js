@@ -28,7 +28,8 @@ function validateFname() {
     if (fname == "") {
         document.getElementById("fname-error").innerHTML = "First name field cannot be empty.";
         return false;
-    } else if (!fname.match(namePattern)) {  //checks if first name matches pattern
+    } else if (fname != "") {
+        if (!fname.match(namePattern)) {  //checks if first name matches pattern
         document.getElementById("fname-error").innerHTML = "Letters, apostrophes, and dashes only.";
         return false;
     } else if (fname.length < 2) { //checks if name is at least 1 character
@@ -41,26 +42,25 @@ function validateFname() {
         document.getElementById("fname-error").innerHTML = "";
         return true;
     }
-}
+  }
+}    
 
 // MIDDLE INITIAL VALIDATION
+/* Check if middle initial is valid */
 function validateMini() {
-    mini = document.getElementById("mini").value;
-    var namePattern = /^[A-Z]+$/;
+    let mini = document.getElementById("mini").value;
+    const namePattern = /^[A-Z]$/;
 
-    //makes middle initial uppercase
+    // Convert middle initial to uppercase
     mini = mini.toUpperCase();
     document.getElementById("mini").value = mini;
 
-    //checks that middle initial is one character
-    if (mini.length > 1) {
-        document.getElementById("mini-error").innerHTML = "Middle initial cannot have more than one character.";
-        return false;
-    } else if (!mini.match(namePattern)) { //checks if middle initial matches pattern
-        document.getElementById("mini-error").innerHTML = "Letters only.";
+    // Check that middle initial is exactly one uppercase letter
+    if (!mini.match(namePattern)) {
+        document.getElementById("mini-error").innerHTML = "Middle initial must be a single uppercase letter.";
         return false;
     } else {
-        document.getElementById("fname-error").innerHTML = "";
+        document.getElementById("mini-error").innerHTML = "";
         return true;
     }
 }
@@ -70,10 +70,11 @@ function validateFname() {
     lname = document.getElementById("lname").value.trim();
     var namePattern = /^[a-zA-Z'-]+$/;
     //checks if last name field is empty
-    if (fname == "") {
+    if (lname == "") {
         document.getElementById("lname-error").innerHTML = "Last name field cannot be empty.";
         return false;
-    } else if (!lname.match(namePattern)) {  //checks if last name matches pattern
+    } else if (lname != "") {
+        if (!lname.match(namePattern)) {  //checks if last name matches pattern
         document.getElementById("lname-error").innerHTML = "Letters, apostrophes, and dashes only.";
         return false;
     } else if (lname.length < 2) { //checks if name is at least 1 character
@@ -86,6 +87,7 @@ function validateFname() {
         document.getElementById("lname-error").innerHTML = "";
         return true;
     }
+  }
 }
 
 // DATE OF BIRTH VALIDATION
