@@ -4,7 +4,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/11/2026
 Version: 3.0
-Purpose: MIS 3371 Homework 3 HTML Form
+Purpose: MIS 3371 Homework 3 HTML Form - builds on Homework 2 with a Validate button
+         that runs all JS checks before allowing form submission.
 -->
 <html lang="en">
   <head>
@@ -37,7 +38,7 @@ Purpose: MIS 3371 Homework 3 HTML Form
     </header>
 <hr>
 <!-- form begins here -->
-<!-- form named "signup" and id="signup" so JS can reference it for the review button -->
+<!-- form named "signup" and id="signup" so JS can reference it for the review and validate buttons -->
 <form name="signup" id="signup" action="thankyou.html">
       <center>
           <div class="format">
@@ -89,7 +90,7 @@ Purpose: MIS 3371 Homework 3 HTML Form
                     <tr>
                           <td class="td1"><label for="lname">Last Name:</label></td>
                           <td>
-                              <!-- letters, apostrophes, numbers 2-5, and dashes only, 1-30 characters, required -->
+                              <!-- letters, apostrophes, and dashes only, 1-30 characters, required -->
                               <input
                                 type="text"
                                 name="lname"
@@ -509,7 +510,7 @@ Purpose: MIS 3371 Homework 3 HTML Form
                         <td class="td1"><label for="pass">Password:</label></td>
                         <td>
                             <!-- 10-30 chars, must have uppercase, lowercase, number, special char -->
-                            <!-- validated on input, focus, and blur for real-time feedback -->
+                            <!-- validated on input and blur for real-time feedback -->
                             <input
                               type="password"
                               name="pass"
@@ -550,15 +551,16 @@ Purpose: MIS 3371 Homework 3 HTML Form
                     <tr>
                         <td class="td1" colspan="4">
                             <center>
-                                 <!-- submit button validates form and redirects to thank you page -->
+                                 <!-- submit button hidden by default, only shown after Validate passes -->
                                  <!-- reset button clears all form inputs -->
                                  <!-- review button triggers reviewInput() to redisplay entered data below form -->
-                                 <input type="submit" name="submit" id="submit">
+                                 <!-- validate button runs all JS checks before allowing submission -->
+                                 <input type="submit" name="submit" id="submit" disabled>
                                   &nbsp;&nbsp;&nbsp;
                                  <input type="reset" name="reset" id="reset">
                                   &nbsp;&nbsp;&nbsp;
                                  <input type="button" name="review" id="review" value="Review" onclick="reviewInput()">
-                                 &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp;
                                  <input type="button" name="validate" id="validate" value="Validate" onclick="validateEverything()">
                             </center>
                         </td>
@@ -583,20 +585,20 @@ Purpose: MIS 3371 Homework 3 HTML Form
 
       </center>
 </form>
-<!-- footer that contains website link goes here -->
-<footer>
-    <p id="footer"> &#169 2026 UFC Performance Clinic | <a href="https://www.ufc.com/ufc-athlete-health-and-performance" target="UFC.com" rel="noopener nonreferrer">Contact Us</a></p>
-</footer>
 
-<script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, and review functionality -->
-
-<!-- inserts alert box into form when necessary -->
+<!-- alert box shown when validate is pressed and errors are still present -->
 <div id="alert-box">
   <div id="alert-content">
     <h4>Please fill out all required information.</h4>
     <button id="close-alert">OK</button>
   </div>
 </div>
-    
+
+<!-- footer that contains website link goes here -->
+<footer>
+    <p id="footer"> &#169 2026 UFC Performance Clinic | <a href="https://www.ufc.com/ufc-athlete-health-and-performance" target="UFC.com" rel="noopener nonreferrer">Contact Us</a></p>
+</footer>
+
+<script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, and review functionality -->
   </body>
 </html>
