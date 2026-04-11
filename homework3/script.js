@@ -21,16 +21,21 @@ output.innerHTML = slider.value; // shows "1" on page load
 slider.oninput = function () { output.innerHTML = this.value; }; // updates value as slider moves
 
 // FIRST NAME VALIDATION
-// required, 1-30 characters, letters/apostrophes/dashes only
 function validateFname() {
-    const fname = document.getElementById("fname").value.trim();
-    const fnameR = /^[a-zA-Z'\-]{1,30}$/;
-
-    if (fname === "") {
-        document.getElementById("fname-error").innerHTML = "First name cannot be empty.";
+    fname = document.getElementById("fname").value.trim();
+    var namePattern = /^[a-zA-Z'-]+$/;
+    //checks if first name field is empty
+    if (fname == "") {
+        document.getElementById("fname-error").innerHTML = "First name field cannot be empty.";
         return false;
-    } else if (!fnameR.test(fname)) {
+    } else if (!fname.match(namePattern)) {  //checks if first name matches pattern
         document.getElementById("fname-error").innerHTML = "Letters, apostrophes, and dashes only.";
+        return false;
+    } else if (fname.length < 2) { //checks if name is at least 1 character
+        document.getElementById("fname-error").innerHTML = "First name cannot be less than 2 characters.";
+        return false;
+    } else if (fname.length > 30) { //checks if name is more than 30 characters
+        document.getElementById("fname-error").innerHTML = "First name cannot be more than 30 characters.";
         return false;
     } else {
         document.getElementById("fname-error").innerHTML = "";
@@ -39,31 +44,43 @@ function validateFname() {
 }
 
 // MIDDLE INITIAL VALIDATION
-// optional, but if entered must be a single letter
 function validateMini() {
-    const mini = document.getElementById("mini").value.trim();
-    const miniR = /^[a-zA-Z]{0,1}$/;
+    mini = document.getElementById("mini").value;
+    var namePattern = /^[A-Z]+$/;
 
-    if (!miniR.test(mini)) {
-        document.getElementById("mini-error").innerHTML = "Middle initial must be a single letter.";
+    //makes middle initial uppercase
+    mini = mini.toUpperCase();
+    document.getElementById("mini").value = mini;
+
+    //checks that middle initial is one character
+    if (mini.length > 1) {
+        document.getElementById("mini-error").innerHTML = "Middle initial cannot have more than one character.";
+        return false;
+    } else if (!mini.match(namePattern)) { //checks if middle initial matches pattern
+        document.getElementById("mini-error").innerHTML = "Letters only.";
         return false;
     } else {
-        document.getElementById("mini-error").innerHTML = "";
+        document.getElementById("fname-error").innerHTML = "";
         return true;
     }
 }
 
 // LAST NAME VALIDATION
-// required, 1-30 characters, letters/apostrophes/dashes only
-function validateLname() {
-    const lname = document.getElementById("lname").value.trim();
-    const lnameR = /^[a-zA-Z'\-]{1,30}$/;
-
-    if (lname === "") {
-        document.getElementById("lname-error").innerHTML = "Last name cannot be empty.";
+function validateFname() {
+    lname = document.getElementById("lname").value.trim();
+    var namePattern = /^[a-zA-Z'-]+$/;
+    //checks if last name field is empty
+    if (fname == "") {
+        document.getElementById("lname-error").innerHTML = "Last name field cannot be empty.";
         return false;
-    } else if (!lnameR.test(lname)) {
+    } else if (!lname.match(namePattern)) {  //checks if last name matches pattern
         document.getElementById("lname-error").innerHTML = "Letters, apostrophes, and dashes only.";
+        return false;
+    } else if (lname.length < 2) { //checks if name is at least 1 character
+        document.getElementById("lname-error").innerHTML = "Last name cannot be less than 2 characters.";
+        return false;
+    } else if (lname.length > 30) { //checks if name is more than 30 characters
+        document.getElementById("lname-error").innerHTML = "Last name cannot be more than 30 characters.";
         return false;
     } else {
         document.getElementById("lname-error").innerHTML = "";
