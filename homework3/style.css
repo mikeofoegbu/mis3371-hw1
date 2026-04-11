@@ -3,7 +3,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/11/2026
 Version: 3.0
-Purpose: MIS 3371 Homework 3 CSS Stylesheet
+Purpose: MIS 3371 Homework 3 CSS Stylesheet - builds on Homework 2 styles with
+         additional rules for the alert box and disabled submit button.
 */
 
 /* UFC-style font variables using system fonts only */
@@ -123,6 +124,8 @@ p {
     font-family: var(--ufc-body);
     font-weight: normal;
 }
+
+/* inline error messages shown below each field */
 .error {
     color: red;
     font-size: 12px;
@@ -130,6 +133,7 @@ p {
     font-weight: normal;
 }
 
+/* real-time password requirement messages */
 .pass-message {
     text-align: right;
     font-family: "optima", sans-serif;
@@ -147,6 +151,7 @@ p {
     margin-top: 5px;
 }
 
+/* review output table styling */
 table.output,
 tr.output,
 td.output {
@@ -158,7 +163,13 @@ td.output {
     color: black;
 }
 
-/*alert box styling*/
+/* submit button appears greyed out when disabled */
+#submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* alert box overlay: covers full screen with a semi-transparent blue background */
 #alert-box {
     display: none;
     position: fixed;
@@ -171,6 +182,7 @@ td.output {
     background-color: rgba(29, 86, 166, 0.442);
 }
 
+/* alert box content card centered on screen */
 #alert-content {
     background-color: white;
     border-radius: 10px;
@@ -189,6 +201,7 @@ td.output {
     font-weight: normal;
 }
 
+/* OK button inside the alert box */
 #close-alert {
     background-color: white;
     border-width: 1px;
@@ -201,7 +214,6 @@ td.output {
     width: 80px;
     border-radius: 20px;
     cursor: pointer;
-
     margin-top: 20px;
     text-align: center;
     font-family: "optima", sans-serif;
