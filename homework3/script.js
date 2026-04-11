@@ -1,10 +1,9 @@
 /*
 Name: Michael Ofoegbu
 Date created: 02/22/2026
-Date last edited: 03/29/2026
-Version: 2.0
-Purpose: MIS 3371 Homework 2 JavaScript - builds on Homework 1 with field-level
-         validation functions, real-time password feedback, and review button output.
+Date last edited: 04/11/2026
+Version: 3.0
+Purpose: MIS 3371 Homework 3 JavaScript
 */
 
 // DYNAMIC DATE
