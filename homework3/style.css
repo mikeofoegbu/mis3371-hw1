@@ -157,3 +157,52 @@ td.output {
     border-radius: 20px;
     color: black;
 }
+
+/*alert box styling*/
+#alert-box {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(29, 86, 166, 0.442);
+}
+
+#alert-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 300px;
+    height: 135px;
+    margin: auto;
+    margin-top: 20%;
+    padding: 30px;
+    text-align: center;
+}
+
+#alert-content h4 {
+    font-size: 20px;
+    text-align: center;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+#close-alert {
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    color: rgba(29, 86, 166, 0.442);
+    border-color: rgba(29, 86, 166, 0.442);
+    font-size: 15px;
+    font-weight: bold;
+    height: 20px;
+    width: 80px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    margin-top: 20px;
+    text-align: center;
+    font-family: "optima", sans-serif;
+}
