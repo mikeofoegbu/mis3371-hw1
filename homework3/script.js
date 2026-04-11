@@ -421,3 +421,64 @@ function reviewInput() {
 function removeReview() {
     document.getElementById("showInput").innerHTML = "";
 }
+
+// Alert Box - shows alert box when neccesary
+function showAlert() {
+    var alertBox = document.getElementById("alert-box");
+    var closeAlert = document.getElementById("close-alert");
+
+    alertBox.style.display = "block";
+    closeAlert.onclick = function () {
+        alertBox.style.display = "none";
+    }
+}
+
+// validate everything on form
+function validateEverything() {
+    let valid = true;
+
+        if (!validateFname()) {
+        valid = false;
+    }
+    if (!validateMini()) {
+        valid = false;
+    }
+    if (!validateLname()) {
+        valid = false;
+    }
+    if (!validateDob()) {
+        valid = false;
+    }
+    if (!validateSsn()) {
+        valid = false;
+    }
+    if (!validateAddress1()) {
+        valid = false;
+    }
+    if (!validateCity()) {
+        valid = false;
+    }
+    if (!validateZcode()) {
+        valid = false;
+    }
+    if (!validateEmail()) {
+        valid = false;
+    }
+    if (!validatePhone()) {
+        valid = false;
+    }
+    if (!validateUname()) {
+        valid = false;
+    }
+    if (!validatePassword()) {
+        valid = false;
+    }
+    if (!confirmPassword()) {
+        valid = false;
+    }
+    if (valid)
+		document.getElementById("submit").disabled = false;
+	} else {
+        showAlert();
+    }
+}
