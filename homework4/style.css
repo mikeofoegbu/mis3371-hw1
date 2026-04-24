@@ -1,1 +1,220 @@
+/*
+Name: Michael Ofoegbu
+Date created: 02/22/2026
+Date last edited: 04/11/2026
+Version: 3.0
+Purpose: MIS 3371 Homework 3 CSS Stylesheet - builds on Homework 2 styles with
+         additional rules for the alert box and disabled submit button.
+*/
 
+/* UFC-style font variables using system fonts only */
+:root {
+    --ufc-head: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+    --ufc-body: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* styles header section containing logo, clinic title, and dynamic date */
+header {
+    width: 100%;
+    background-color: red; /* red background aligns with UFC brand colors */
+}
+
+/* body uses flexbox to center content and keep footer positioned at bottom */
+body {
+    display: flex; /* enables flexible vertical layout */
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin: 0;
+    height: 100%;
+    min-height: 100vh; /* ensures page fills full viewport height */
+    font-family: var(--ufc-body); /* default body font */
+}
+
+/* allows form to expand and push footer downward */
+form {
+    flex-grow: 1;
+}
+
+/* heading styles for main page title and confirmation page */
+h1, h2 {
+    text-align: center;
+    font-family: var(--ufc-head); /* bold, condensed UFC-style font */
+    font-weight: normal;
+    text-transform: uppercase; /* matches UFC branding */
+    letter-spacing: 0.04em; /* slight spacing for athletic look */
+    flex-grow: 1;
+}
+
+/* centers thank you message on confirmation page */
+main {
+    text-align: center;
+    font-family: var(--ufc-head);
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    flex-grow: 1;
+}
+
+.image {
+    text-align: left;
+}
+
+/* aligns form labels to right side for clean form layout */
+.td1 {
+    text-align: right;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+/* bold section headers within form */
+th {
+    text-align: center;
+    font-family: var(--ufc-head); /* section headers use UFC-style font */
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* footer styling with grey background and full width layout */
+footer {
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    height: 2.5rem;
+}
+
+/* styles paragraph inside footer */
+#footer {
+    text-align: right;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+/* consistent font styling applied to form labels and inputs */
+label {
+    text-align: right;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+input {
+    text-align: left;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+textarea {
+    text-align: left;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+/* styles dynamically inserted date in header */
+#today {
+    text-align: left;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+p {
+    text-align: right;
+    font-family: var(--ufc-body);
+    font-weight: normal;
+}
+
+/* inline error messages shown below each field */
+.error {
+    color: red;
+    font-size: 12px;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+/* real-time password requirement messages */
+.pass-message {
+    text-align: right;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+    position: relative;
+    left: 100px;
+    background: transparent;
+    padding: 10px;
+    border-spacing: 2px;
+    border-radius: 20px;
+    color: red;
+}
+
+#review {
+    margin-top: 5px;
+}
+
+/* review output table styling */
+table.output,
+tr.output,
+td.output {
+    width: 500px;
+    background-color: rgba(160, 235, 223, 0.442);
+    padding: 10px;
+    border-spacing: 2px;
+    border-radius: 20px;
+    color: black;
+}
+
+/* submit button appears greyed out when disabled */
+#submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* alert box overlay: covers full screen with a semi-transparent blue background */
+#alert-box {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(29, 86, 166, 0.442);
+}
+
+/* alert box content card centered on screen */
+#alert-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 300px;
+    height: 135px;
+    margin: auto;
+    margin-top: 20%;
+    padding: 30px;
+    text-align: center;
+}
+
+#alert-content h4 {
+    font-size: 20px;
+    text-align: center;
+    font-family: "optima", sans-serif;
+    font-weight: normal;
+}
+
+/* OK button inside the alert box */
+#close-alert {
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    color: rgba(29, 86, 166, 0.442);
+    border-color: rgba(29, 86, 166, 0.442);
+    font-size: 15px;
+    font-weight: bold;
+    height: 20px;
+    width: 80px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "optima", sans-serif;
+}
