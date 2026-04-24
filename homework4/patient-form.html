@@ -1,1 +1,603 @@
+<!DOCTYPE html>
+<!--
+Name: Michael Ofoegbu
+Date created: 02/22/2026
+Date last edited: 04/24/2026
+Version: 3.0
+Purpose: MIS 3371 Homework 4 HTML Form
+-->
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="style.css"> <!-- links to css file-->
 
+      <!-- displays text in the browser's tab -->
+      <title> Post-Fight Medical Registration | UFC Performance Clinic </title>
+  </head>
+  <body>
+    <header> <!-- header table used to structure logo, title, and dynamic date -->
+      <table width="100%">
+        <tr>
+          <td valign="top" align="left" width="20%">
+            <div class="image">
+              <img align="center" src="ufclogo.png" alt="UFC Performance Clinic Logo" width="160px" id="Logo"/>
+              <!-- UFC logo image displayed in top left of header -->
+            </div>
+          </td>
+
+          <td align="center">
+            <h2> UFC Performance Clinic </h2>
+          </td>
+
+          <td valign="bottom" align="right" width="20%">
+            <strong> Today's Date:</strong> <span id="today"></span>
+            <!-- span used to dynamically insert today's date via JavaScript -->
+          </td>
+        </tr>
+      </table>
+    </header>
+<hr>
+<!-- form begins here -->
+<!-- form named "signup" and id="signup" so JS can reference it for the review and validate buttons -->
+<form name="signup" id="signup" action="thankyou.html">
+      <center>
+          <div class="format">
+                <table>
+                    <tr>
+                        <th colspan="4">Create Patient Portal Account</th>
+                    </tr>
+                    <!-- patients information section of form starts here -->
+
+                    <tr>
+                        <td class="td1"><label for="fname">First Name:</label></td>
+                        <td>
+                            <!-- letters, apostrophes, and dashes only, 1-30 characters, required -->
+                            <input
+                              type="text"
+                              name="fname"
+                              id="fname"
+                              maxlength="30"
+                              required
+                              title="Letters, apostrophes, and dashes only"
+                              pattern="[a-zA-Z'\-]{1,30}"
+                              onblur="validateFname()"
+                              placeholder="Connor"
+                              />
+                            <br/>
+                            <span class="error" id="fname-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="mini">Middle Initial:</label></td>
+                        <td>
+                            <!-- one letter only, optional -->
+                            <input
+                              type="text"
+                              name="mini"
+                              id="mini"
+                              maxlength="1"
+                              title="One letter only, optional"
+                              pattern="[a-zA-Z]{0,1}"
+                              onblur="validateMini()"
+                              placeholder="A"
+                              />
+                            <br/>
+                            <span class="error" id="mini-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                          <td class="td1"><label for="lname">Last Name:</label></td>
+                          <td>
+                              <!-- letters, apostrophes, and dashes only, 1-30 characters, required -->
+                              <input
+                                type="text"
+                                name="lname"
+                                id="lname"
+                                maxlength="30"
+                                required
+                                title="Letters, apostrophes, dashes only (e.g. O'Brien, Smith-Jones)"
+                                pattern="[a-zA-Z'\-]{1,30}"
+                                onblur="validateLname()"
+                                placeholder="McGregor"
+                                />
+                              <br/>
+                              <span class="error" id="lname-error"></span>
+                          </td>
+                    </tr>
+                    
+                    <tr>
+                          <td class="td1"><label for="psex">Patient's Sex:</label></td>
+                          <td>
+                              <input
+                                type="radio"
+                                id="s1"
+                                name="psex"
+                                value="Male"
+                                title="Select your sex"
+                                />
+                                Male
+
+                              <input
+                                type="radio"
+                                id="s2"
+                                name="psex"
+                                value="Female"
+                                title="Select your sex"
+                                />
+                                Female
+                          </td>
+                    </tr>
+
+                    <tr>
+                          <td class="td1"><label for="dob">Date of Birth:</label></td>
+                          <td>
+                              <!-- date range validated via JS: cannot be future or more than 120 years ago -->
+                              <input
+                                  type="date"
+                                  id="dob"
+                                  name="dob"
+                                  required
+                                  title="Date cannot be in the future or more than 120 years ago"
+                                  onblur="validateDob()"
+                                  />
+                              <br/>
+                              <span class="error" id="dob-error"></span>
+                          </td>
+                    </tr>
+
+                    <tr>
+                          <td class="td1"><label for="ssn">SSN:</label></td>
+                          <td>
+                            <!-- password field used to obscure social security number input -->
+                            <!-- format: XXX-XX-XXXX -->
+                            <input
+                              type="password"
+                              minlength="9"
+                              maxlength="11"
+                              name="ssn"
+                              id="ssn"
+                              required
+                              title="Enter your SSN in the format: XXX-XX-XXXX"
+                              placeholder="123-45-6789"
+                              onblur="validateSsn()"
+                              />
+                            <br/>
+                            <span class="error" id="ssn-error"></span>
+                          </td>
+                    </tr>
+                  
+                    <tr>
+                        <th colspan="4"><hr></th> <!-- divider line -->
+                    </tr>
+                  
+                    <tr>
+                        <th colspan="4">Patient's Contact Information</th>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="address1">Address:</label></td>
+                        <td>
+                            <!-- required, 2 to 30 characters -->
+                            <input
+                              type="text"
+                              name="address1"
+                              id="address1"
+                              minlength="2"
+                              maxlength="30"
+                              required
+                              title="Street address, 2 to 30 characters"
+                              placeholder="6650 S Torrey Pines Dr"
+                              onblur="validateAddress1()"
+                              />
+                            <br/>
+                            <span class="error" id="address1-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="address2">Apt/Suite #:</label></td>
+                        <td>
+                            <!-- optional, but if entered must be 2-30 characters -->
+                            <input
+                              type="text"
+                              name="address2"
+                              id="address2"
+                              maxlength="30"
+                              title="Apartment or suite number, optional (2 to 30 characters if entered)"
+                              placeholder="194"
+                              onblur="validateAddress2()"
+                              />
+                            <br/>
+                            <span class="error" id="address2-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="city">City:</label></td>
+                        <td>
+                            <!-- required, 2 to 30 characters -->
+                            <input
+                              type="text"
+                              name="city"
+                              id="city"
+                              minlength="2"
+                              maxlength="30"
+                              required
+                              title="City name, 2 to 30 characters"
+                              placeholder="Las Vegas"
+                              onblur="validateCity()"
+                              />
+                            <br/>
+                            <span class="error" id="city-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="state">State:</label></td>
+                        <td>
+                          <!-- added name and id so state value submits with form -->
+                          <!-- null initial value forces user to make a selection -->
+                          <select name="state" id="state" title="Select your state or territory" onblur="validateState()">
+                            <option value="" selected disabled>Please Select One</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                          </select>
+                          <br/>
+                          <span class="error" id="state-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="zip">Zip Code:</label></td>
+                        <td>
+                            <!-- accepts 5 digit or zip+4 format (up to 10 chars), truncated to 5 via JS -->
+                            <input
+                              type="text"
+                              name="zip"
+                              id="zip"
+                              maxlength="10"
+                              required
+                              title="Enter 5-digit zip code. Zip+4 format (e.g. 77002-1234) also accepted."
+                              placeholder="89118"
+                              onblur="validateZip()"
+                              />
+                            <br/>
+                            <span class="error" id="zip-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="email">Email Address:</label></td>
+                        <td>
+                            <!-- type="email" provides browser-level format validation -->
+                            <input
+                              type="email"
+                              name="email"
+                              id="email"
+                              required
+                              title="Enter a valid email address in the format: name@domain.tld"
+                              placeholder="ufcmed@gmail.com"
+                              onblur="validateEmail()"
+                              />
+                            <br/>
+                            <span class="error" id="email-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="phone">Phone Number:</label></td>
+                        <td>
+                            <!-- formatted as XXX-XXX-XXXX, auto-formatted via JS onblur -->
+                            <input
+                              type="text"
+                              name="phone"
+                              id="phone"
+                              maxlength="12"
+                              required
+                              title="Enter your phone number in the format: XXX-XXX-XXXX"
+                              placeholder="123-456-7890"
+                              onblur="validatePhone()"
+                              />
+                            <br/>
+                            <span class="error" id="phone-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="4"><hr></th> <!-- divider line -->
+                    </tr>
+
+                    <!-- patient history section -->
+                    <tr>
+                        <th colspan="4">Patient's History</th>
+                    </tr>
+
+                    <!-- radio button set 2: insurance -->
+                    <tr>
+                          <td class="td1"><label>Do you have insurance?</label></td>
+                          <td>
+                              <input
+                                type="radio"
+                                id="ins_yes"
+                                name="insurance"
+                                value="Yes"
+                                title="Select Yes if you have insurance"
+                                />
+                                Yes
+
+                              <input
+                                type="radio"
+                                id="ins_no"
+                                name="insurance"
+                                value="No"
+                                title="Select No if you do not have insurance"
+                                />
+                                No
+                          </td>
+                    </tr>
+
+                    <!-- radio button set 3: vaccinated -->
+                    <tr>
+                          <td class="td1"><label>Have you been vaccinated?</label></td>
+                          <td>
+                              <input
+                                type="radio"
+                                id="vax_yes"
+                                name="vaccinated"
+                                value="Yes"
+                                title="Select Yes if you have been vaccinated"
+                                />
+                                Yes
+
+                              <input
+                                type="radio"
+                                id="vax_no"
+                                name="vaccinated"
+                                value="No"
+                                title="Select No if you have not been vaccinated"
+                                />
+                                No
+                          </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="pat_hist">Have you ever had/are you currently experiencing?</label></td>
+                        <td>
+                            <!-- checkboxes allow user to select multiple previous medical conditions -->
+                            <input type="checkbox" id="concussion" name="history" value="Concussion / Head Trauma" title="Check if you have had or currently have a concussion or head trauma">
+                            <label for="concussion">Concussion / Head Trauma</label><br>
+
+                            <input type="checkbox" id="brokenbones" name="history" value="Broken Bones" title="Check if you have had or currently have broken bones">
+                            <label for="brokenbones">Broken Bones</label><br>
+
+                            <input type="checkbox" id="jointinjury" name="history" value="Joint Injury" title="Check if you have had or currently have a joint injury">
+                            <label for="jointinjury">Joint Injury (Knee, Shoulder, etc.)</label><br>
+
+                            <input type="checkbox" id="muscle" name="history" value="Muscle Strain / Tear" title="Check if you have had or currently have a muscle strain or tear">
+                            <label for="muscle">Muscle Strain / Tear</label><br>
+
+                            <input type="checkbox" id="backpain" name="history" value="Chronic Back Pain" title="Check if you have or currently experience chronic back pain">
+                            <label for="backpain">Chronic Back Pain</label><br>
+
+                            <input type="checkbox" id="surgery" name="history" value="Previous Surgery" title="Check if you have had previous surgery">
+                            <label for="surgery">Previous Surgery</label><br>
+
+                            <input type="checkbox" id="other" name="history" value="Other" title="Check if you have another condition not listed above">
+                            <label for="other">Other</label><br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1" align="right">
+                            <label for="notes">If you selected any of the above, please explain:</label>
+                        </td>
+                        <td>
+                            <!-- textarea for symptom description, optional, 4 rows x 50 cols -->
+                            <textarea
+                              rows="4"
+                              cols="50"
+                              maxlength="500"
+                              id="notes"
+                              name="notes"
+                              title="Briefly describe your symptoms or medical history (optional, 500 characters max)"
+                              placeholder="(Insert text here...)"
+                              ></textarea>
+                              <span id="description_text"></span>
+                        </td>
+                    </tr>
+
+                    <!-- range slider: urgency of appointment, displays dynamic value via JS -->
+                    <tr>
+                        <td class="td1"><label for="range">Urgency of Appointment? <br/>(Rate from 1 to 10)</label></td>
+                        <td>
+                            <!-- oninput updates displayed value dynamically as slider moves -->
+                            <input
+                              type="range"
+                              name="range"
+                              id="range"
+                              min="1"
+                              max="10"
+                              value="1"
+                              title="Slide to rate the urgency of your appointment from 1 (low) to 10 (high)"
+                              oninput="document.getElementById('range-scale').innerHTML = this.value;"
+                              />
+                              <span id="range-scale">1</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="4"><hr></th> <!-- divider line -->
+                    </tr>
+                    
+                    <!-- account information section begins here -->
+                    <tr>
+                        <th colspan="4">Finish Patient Portal Account</th>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="uname">Username:</label></td>
+                        <td>
+                            <!-- 5-15 characters, letters/numbers/underscores, cannot start with a number -->
+                            <input
+                              type="text"
+                              name="uname"
+                              id="uname"
+                              minlength="5"
+                              maxlength="15"
+                              required
+                              title="5 to 15 characters. Letters, numbers, and underscores only. Cannot start with a number. No spaces."
+                              placeholder="ufcgoat2000"
+                              onblur="validateUname()"
+                              />
+                            <br/>
+                            <span class="error" id="uname-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1"><label for="pass">Password:</label></td>
+                        <td>
+                            <!-- 10-30 chars, must have uppercase, lowercase, number, special char -->
+                            <!-- validated on input and blur for real-time feedback -->
+                            <input
+                              type="password"
+                              name="pass"
+                              id="pass"
+                              minlength="10"
+                              maxlength="30"
+                              required
+                              title="10 to 30 characters. Must include at least one uppercase letter, one lowercase letter, one number, and one special character. Cannot contain your username."
+                              placeholder="Required"
+                              oninput="validatePass()"
+                              onblur="validatePass()"
+                              />
+                            <br/>
+                            <span class="error" id="pass-error"></span>
+                        </td>
+                    </tr>
+
+                    <!-- confirm password field -->
+                    <tr>
+                        <td class="td1"><label for="pass2">Re-enter Password:</label></td>
+                        <td>
+                            <input
+                              type="password"
+                              name="pass2"
+                              id="pass2"
+                              minlength="10"
+                              maxlength="30"
+                              required
+                              title="Re-enter your password exactly as entered above"
+                              placeholder="Required"
+                              onblur="validatePass2()"
+                              />
+                            <br/>
+                            <span class="error" id="pass2-error"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1" colspan="4">
+                            <center>
+                                 <!-- submit button hidden by default, only shown after Validate passes -->
+                                 <!-- reset button clears all form inputs -->
+                                 <!-- review button triggers reviewInput() to redisplay entered data below form -->
+                                 <!-- validate button runs all JS checks before allowing submission -->
+                                 <input type="submit" name="submit" id="submit" disabled>
+                                  &nbsp;&nbsp;&nbsp;
+                                 <input type="reset" name="reset" id="reset">
+                                  &nbsp;&nbsp;&nbsp;
+                                 <input type="button" name="review" id="review" value="Review" onclick="reviewInput()">
+                                  &nbsp;&nbsp;&nbsp;
+                                 <input type="button" name="validate" id="validate" value="Validate" onclick="validateEverything()">
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- password requirement messages displayed in real time as user types -->
+                <div class="pass-message">
+                    <span id="msg1"></span><br/>
+                    <span id="msg2"></span><br/>
+                    <span id="msg3"></span><br/>
+                    <span id="msg4"></span><br/>
+                    <span id="msg5"></span><br/>
+                </div>
+
+          </div>
+
+          <!-- review output area: redisplays entered form data when Review button is clicked -->
+          <center>
+              <p id="showInput"></p>
+          </center>
+
+      </center>
+</form>
+
+<!-- alert box shown when validate is pressed and errors are still present -->
+<div id="alert-box">
+  <div id="alert-content">
+    <h4>Please fill out all required information.</h4>
+    <button id="close-alert">OK</button>
+  </div>
+</div>
+
+<!-- footer that contains website link goes here -->
+<footer>
+    <p id="footer"> &#169 2026 UFC Performance Clinic | <a href="https://www.ufc.com/ufc-athlete-health-and-performance" target="UFC.com" rel="noopener nonreferrer">Contact Us</a></p>
+</footer>
+
+<script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, and review functionality -->
+  </body>
+</html>
