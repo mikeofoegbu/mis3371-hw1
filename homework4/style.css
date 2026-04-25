@@ -1,7 +1,7 @@
 /*
 Name: Michael Ofoegbu
 Date created: 02/22/2026
-Date last edited: 04/24/2026
+Date last edited: 04/25/2026
 Version: 4.0
 Purpose: MIS 3371 Homework 4 CSS Stylesheet
 */
@@ -25,6 +25,7 @@ body {
     align-items: center;
     background-color: white;
     margin: 0;
+    padding-bottom: 0; /* removes white space below footer iframe */
     height: 100%;
     min-height: 100vh; /* ensures page fills full viewport height */
     font-family: var(--ufc-body); /* default body font */
@@ -218,13 +219,13 @@ td.output {
     font-family: "optima", sans-serif;
 }
 
-/*iframe styling */
+/* iframe sidebar styling */
 .iframe-container {
     position: absolute;
     top: 15%;
     right: 15px;
     width: 25%;
-    height: 300px;
+    height: 300px; /* fixed height matches iframe so all four borders show */
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -233,9 +234,4 @@ td.output {
     width: 95%;
     height: 300px;
     border: 1px solid black;
-}
-
-body {
-    padding-bottom: 0;
-    margin-bottom: 0;
 }
