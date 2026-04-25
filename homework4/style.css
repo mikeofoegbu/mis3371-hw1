@@ -217,6 +217,7 @@ td.output {
     text-align: center;
     font-family: "optima", sans-serif;
 }
+
 /*iframe styling */
 .iframe-container {
     position: absolute;
@@ -230,6 +231,6 @@ td.output {
 
 .iframe-container iframe {
     width: 95%;
-    height: 20%;
+    height: 15%;
     border: 1px solid black;
 }
