@@ -3,7 +3,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/25/2026
 Version: 4.0
-Purpose: MIS 3371 Homework 4 CSS Stylesheet
+Purpose: MIS 3371 Homework 4 CSS Stylesheet - builds on Homework 3 styles with
+         sticky header, iframe sidebar, iframe footer, and welcome message styling.
 */
 
 /* UFC-style font variables using system fonts only */
@@ -12,19 +13,14 @@ Purpose: MIS 3371 Homework 4 CSS Stylesheet
     --ufc-body: "Helvetica Neue", Arial, sans-serif;
 }
 
-/* styles header section containing logo, clinic title, and dynamic date */
+/* sticky header: stays fixed at top of viewport as user scrolls down the form */
 header {
     position: sticky;
     top: 0;
     width: 100%;
     background-color: red; /* red background aligns with UFC brand colors */
-        transition: background-color 0.4s ease-in-out;
-    z-index: 1000;
-}
-
-header.scrolled {
-    background-color: red
-    opacity: 5.0;
+    z-index: 1000; /* keeps header above all other page content while scrolling */
+    transition: background-color 0.4s ease-in-out;
 }
 
 /* body uses flexbox to center content and keep footer positioned at bottom */
@@ -34,9 +30,7 @@ body {
     align-items: center;
     background-color: white;
     margin: 0;
-    padding-bottom: 0; /* removes white space below footer iframe */
-    height: 100%;
-    min-height: 100vh; /* ensures page fills full viewport height */
+    padding: 0;
     font-family: var(--ufc-body); /* default body font */
 }
 
@@ -228,35 +222,42 @@ td.output {
     font-family: "optima", sans-serif;
 }
 
-/* iframe sidebar styling */
+/* iframe sidebar container: fixed position on right side of page */
 .iframe-container {
     position: absolute;
     top: 25%;
     right: 15px;
     width: 25%;
-    height: 300px; /* fixed height matches iframe so all four borders show */
+    height: 300px; /* matches iframe height so all four borders are visible */
     overflow: hidden;
     box-sizing: border-box;
 }
 
+/* iframe sidebar: Wikipedia UFC page, bordered box */
 .iframe-container iframe {
     width: 95%;
-    height: 20%;
+    height: 300px; /* fixed pixel height so bottom border shows correctly */
     border: 1px solid black;
 }
 
+/* welcome message displayed when a returning user cookie is found */
 #welcome1 {
-    margin-top: 20px;
-    font-size: 20px;
+    display: block;
+    margin-top: 10px;
+    font-size: 18px;
     text-align: center;
     font-family: "optima", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
+    color: black;
 }
 
+/* "not you?" link shown below welcome message for returning users */
 #welcome2 {
-    margin-top: 20px;
-    font-size: 20px;
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
     text-align: center;
     font-family: "optima", sans-serif;
     font-weight: normal;
+    color: black;
 }
