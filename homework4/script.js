@@ -3,7 +3,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/25/2026
 Version: 4.0
-Purpose: MIS 3371 Homework 4 JavaScript
+Purpose: MIS 3371 Homework 4 JavaScript - builds on Homework 3 with cookie-based
+         user recognition, local storage for form pre-filling, and welcome messaging.
 */
 
 // DYNAMIC DATE
@@ -19,6 +20,147 @@ let output = document.getElementById("range-scale");
 output.innerHTML = slider.value; // shows "1" on page load
 
 slider.oninput = function () { output.innerHTML = this.value; }; // updates value as slider moves
+
+// =====================================================================
+// COOKIE FUNCTIONS
+// cookies are small pieces of text the browser saves on the user's computer
+// used here to remember the user's first name between visits
+// =====================================================================
+
+// sets a cookie with a given name, value, and number of days until it expires
+function setCookie(name, value, days) {
+    var expiry = new Date();
+    expiry.setTime(expiry.getTime() + (days * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + expiry.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// reads a cookie by name and returns its value, or empty string if not found
+function getCookie(name) {
+    var search = name + "=";
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf(search) === 0) {
+            return cookie.substring(search.length, cookie.length);
+        }
+    }
+    return "";
+}
+
+// deletes a cookie by setting its expiry to the past
+function deleteCookie(name) {
+    setCookie(name, "", -1);
+}
+
+// =====================================================================
+// LOCAL STORAGE
+// local storage saves non-sensitive form field values in the browser
+// so they can be pre-filled the next time the user visits
+// passwords and SSN are intentionally excluded for security
+// =====================================================================
+
+// list of fields to save and restore via local storage
+// each entry maps a field id to a storage key name
+var fields = [
+    { id: "fname",    key: "ls_fname"    },
+    { id: "mini",     key: "ls_mini"     },
+    { id: "lname",    key: "ls_lname"    },
+    { id: "dob",      key: "ls_dob"      },
+    { id: "address1", key: "ls_address1" },
+    { id: "address2", key: "ls_address2" },
+    { id: "city",     key: "ls_city"     },
+    { id: "zip",      key: "ls_zip"      },
+    { id: "email",    key: "ls_email"    },
+    { id: "phone",    key: "ls_phone"    },
+    { id: "uname",    key: "ls_uname"    },
+];
+
+// saves a single field's value to local storage when the user types in it
+function saveFieldToStorage(fieldId, storageKey) {
+    var el = document.getElementById(fieldId);
+    if (el) {
+        el.addEventListener("input", function () {
+            localStorage.setItem(storageKey, el.value);
+        });
+    }
+}
+
+// pre-fills a field from local storage if a saved value exists
+function loadFieldFromStorage(fieldId, storageKey) {
+    var el = document.getElementById(fieldId);
+    if (el) {
+        var saved = localStorage.getItem(storageKey);
+        if (saved) {
+            el.value = saved;
+        }
+    }
+}
+
+// clears all saved local storage values for this form
+function clearLocalStorage() {
+    fields.forEach(function (f) {
+        localStorage.removeItem(f.key);
+    });
+}
+
+// =====================================================================
+// COOKIE + LOCAL STORAGE: PAGE LOAD LOGIC
+// on page load, check if a cookie exists for this user
+// if it does: show welcome back message, pre-fill fields from local storage
+// if it doesn't: show nothing, wait for user to fill in the form
+// =====================================================================
+window.onload = function () {
+    var firstName = getCookie("ufc_firstname");
+
+    if (firstName !== "") {
+        // returning user: show welcome message and pre-fill form from local storage
+        document.getElementById("welcome1").innerHTML = "Welcome back, " + firstName + "!";
+        document.getElementById("welcome2").innerHTML =
+            "<a href='#' id='new-user-link'>Not " + firstName + "? Click here to start a new form.</a>";
+
+        // clicking the link clears the cookie and local storage and reloads the page
+        document.getElementById("new-user-link").addEventListener("click", function (e) {
+            e.preventDefault();
+            deleteCookie("ufc_firstname");
+            clearLocalStorage();
+            location.reload();
+        });
+
+        // pre-fill all saved fields from local storage
+        fields.forEach(function (f) {
+            loadFieldFromStorage(f.id, f.key);
+        });
+
+    } else {
+        // first-time visitor: no welcome message shown
+        document.getElementById("welcome1").innerHTML = "";
+        document.getElementById("welcome2").innerHTML = "";
+    }
+
+    // attach save-on-input listeners to all tracked fields regardless of returning/new user
+    fields.forEach(function (f) {
+        var el = document.getElementById(f.id);
+        if (el) {
+            el.addEventListener("input", function () {
+                var rememberMe = document.getElementById("rememberMe");
+                if (rememberMe && rememberMe.checked) {
+                    localStorage.setItem(f.key, el.value);
+                    // save first name cookie separately for the welcome message
+                    if (f.id === "fname") {
+                        setCookie("ufc_firstname", el.value, 2); // expires in 48 hours
+                    }
+                } else {
+                    // remember me is unchecked: clear storage as user types
+                    localStorage.removeItem(f.key);
+                    if (f.id === "fname") {
+                        deleteCookie("ufc_firstname");
+                    }
+                }
+            });
+        }
+    });
+};
 
 // FIRST NAME VALIDATION
 // required, 1-30 characters, letters/apostrophes/dashes only
@@ -457,79 +599,4 @@ function reviewInput() {
 // clears the review output area
 function removeReview() {
     document.getElementById("showInput").innerHTML = "";
-}
-
-//cookie for remembering info input on form//
-function setCookie(name, cvalue, expiryDays) {
-    var day = new Date();
-    day.setTime(day.getTime() + (expiryDays*24*60*60*1000));
-    var expires = "expires=" + day.toUTCString();
-    document.cookie = name + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-    var cookieName = name + "=";
-    var cookies = document.cookie.split(';');
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        while (cookie.charAt(0) == ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(cookieName) == 0) {
-            return cookie.substring(cookieName.length, cookie.length);
-        }
-    }
-    return " ";
-}
-
-var inputs = [
-    {id: "fname", cookieName: "firstName"},
-    {id: "mini", cookieName: "middleInitial"},
-    {id: "lname", cookieName: "lastName"},
-    {id: "dob", cookieName: "dob"},
-    {id: "ssn", cookieName: "ssn"},
-    {id: "address1", cookieName: "address1"},
-    {id: "city", cookieName: "city"},
-    {id: "zcode", cookieName: "zipCode"},
-    {id: "email", cookieName: "email"},
-    {id: "phnum", cookieName: "phone"},
-    {id: "uname", cookieName: "userName"},
-];
-
-inputs.forEach(function(input) {
-    var inputElement = document.getElementById(input.id);
-
-    //prefill input fields with value from the cookie
-    var cookieValue = getCookie(input.cookieName);
-    if (cookieValue !== "") {
-        inputElement.value = cookieValue;
-    }
-
-    //set a cookie with the input value when the input field changes
-    inputElement.addEventListener("input", function() {
-        setCookie(input.cookieName, inputElement.value, 30);
-    });
-
-});
-
-//greet the user with their name + message if the cookie is set
-var firstName = getCookie("firstName");
-if (firstName !== "") {
-    document.getElementById("welcome").innerHTML = "Welcome back, " + firstName + "! </br>";
-}
-
-//greet the user with their name + message if the cookie is set
-var firstName = getCookie("firstName");
-if (firstName !== "") {
-    document.getElementById("welcome").innerHTML = "Welcome back, " + firstName + "! </br>";
-    document.getElementById("welcome2").innerHTML =
-        "<a href='#' id='new-user'>Not " + firstName + "? Click here to start a new form. </a>";
-
-    document.getElementById("new-user").addEventListener("click", function() {
-        inputs.forEach(function(input) {
-            setCookie(input.cookieName, "", -1);
-        });
-        location.reload();
-    });
 }
