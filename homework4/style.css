@@ -24,7 +24,7 @@ header {
 
 header.scrolled {
     background-color: red
-    opacity: 1.0;
+    opacity: 5.0;
 }
 
 /* body uses flexbox to center content and keep footer positioned at bottom */
