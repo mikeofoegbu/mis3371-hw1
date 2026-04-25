@@ -467,7 +467,7 @@ function setCookie(name, cvalue, expiryDays) {
     document.cookie = name + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function getCookie() {
+function getCookie(name) {
     var cookieName = name + "=";
     var cookies = document.cookie.split(';');
 
@@ -480,7 +480,7 @@ function getCookie() {
             return cookie.substring(cookieName.length, cookie.length);
         }
     }
-    return "";
+    return " ";
 }
 
 var inputs = [
