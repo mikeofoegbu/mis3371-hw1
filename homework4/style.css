@@ -224,7 +224,7 @@ td.output {
     top: 15%;
     right: 15px;
     width: 25%;
-    height: 100%;
+    height: 300px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -233,4 +233,9 @@ td.output {
     width: 95%;
     height: 300px;
     border: 1px solid black;
+}
+
+body {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
