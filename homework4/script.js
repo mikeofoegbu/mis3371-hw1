@@ -518,3 +518,18 @@ var firstName = getCookie("firstName");
 if (firstName !== "") {
     document.getElementById("welcome").innerHTML = "Welcome back, " + firstName + "! </br>";
 }
+
+//greet the user with their name + message if the cookie is set
+var firstName = getCookie("firstName");
+if (firstName !== "") {
+    document.getElementById("welcome").innerHTML = "Welcome back, " + firstName + "! </br>";
+    document.getElementById("welcome2").innerHTML =
+        "<a href='#' id='new-user'>Not " + firstName + "? Click here to start a new form. </a>";
+
+    document.getElementById("new-user").addEventListener("click", function() {
+        inputs.forEach(function(input) {
+            setCookie(input.cookieName, "", -1);
+        });
+        location.reload();
+    });
+}
