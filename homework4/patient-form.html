@@ -2,7 +2,7 @@
 <!--
 Name: Michael Ofoegbu
 Date created: 02/22/2026
-Date last edited: 04/24/2026
+Date last edited: 04/25/2026
 Version: 4.0
 Purpose: MIS 3371 Homework 4 HTML Form
 -->
@@ -36,9 +36,10 @@ Purpose: MIS 3371 Homework 4 HTML Form
       </table>
     </header>
 <hr>
+<!-- sidebar iframe: displays UFC Wikipedia page as supplementary content -->
 <div class="iframe-container">
-    <iframe class="frame" src="https://en.wikipedia.org/wiki/UFC" frameborder="0"></iframe>
-</div>    
+    <iframe class="frame" src="https://en.wikipedia.org/wiki/Ultimate_Fighting_Championship" frameborder="0"></iframe>
+</div>
 <!-- form begins here -->
 <!-- form named "signup" and id="signup" so JS can reference it for the review and validate buttons -->
 <form name="signup" id="signup" action="thankyou.html">
@@ -596,8 +597,8 @@ Purpose: MIS 3371 Homework 4 HTML Form
   </div>
 </div>
 
-<!-- iframe footer goes here that contains website link -->
-<iframe src="footer.html" width="100%" height="100px" title="footer"></iframe>
+<!-- footer iframe: loads footer.html as a separate file, sits flush at the bottom -->
+<iframe src="footer.html" width="100%" height="100px" title="footer" style="display: block;"></iframe>
 
 <script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, and review functionality -->
   </body>
