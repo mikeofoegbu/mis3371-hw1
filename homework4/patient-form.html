@@ -4,7 +4,8 @@ Name: Michael Ofoegbu
 Date created: 02/22/2026
 Date last edited: 04/25/2026
 Version: 4.0
-Purpose: MIS 3371 Homework 4 HTML Form
+Purpose: MIS 3371 Homework 4 HTML Form - builds on Homework 3 with sticky header,
+         iframe sidebar, iframe footer, cookies, and local storage.
 -->
 <html lang="en">
   <head>
@@ -14,7 +15,7 @@ Purpose: MIS 3371 Homework 4 HTML Form
       <title> Post-Fight Medical Registration | UFC Performance Clinic </title>
   </head>
   <body>
-    <header> <!-- header table used to structure logo, title, and dynamic date -->
+    <header> <!-- sticky header: stays at top of screen as user scrolls -->
       <table width="100%">
         <tr>
           <td valign="top" align="left" width="20%">
@@ -36,14 +37,19 @@ Purpose: MIS 3371 Homework 4 HTML Form
       </table>
     </header>
 <hr>
+
+<!-- welcome message area: populated by JS if a returning user cookie is found -->
 <center>
     <span id="welcome1"></span>
+    <br/>
     <span id="welcome2"></span>
-</center>    
+</center>
+
 <!-- sidebar iframe: displays UFC Wikipedia page as supplementary content -->
 <div class="iframe-container">
     <iframe class="frame" src="https://en.wikipedia.org/wiki/Ultimate_Fighting_Championship" frameborder="0"></iframe>
 </div>
+
 <!-- form begins here -->
 <!-- form named "signup" and id="signup" so JS can reference it for the review and validate buttons -->
 <form name="signup" id="signup" action="thankyou.html">
@@ -59,6 +65,7 @@ Purpose: MIS 3371 Homework 4 HTML Form
                         <td class="td1"><label for="fname">First Name:</label></td>
                         <td>
                             <!-- letters, apostrophes, and dashes only, 1-30 characters, required -->
+                            <!-- cookie saves this field and pre-fills it on return visits -->
                             <input
                               type="text"
                               name="fname"
@@ -158,7 +165,7 @@ Purpose: MIS 3371 Homework 4 HTML Form
                           <td class="td1"><label for="ssn">SSN:</label></td>
                           <td>
                             <!-- password field used to obscure social security number input -->
-                            <!-- format: XXX-XX-XXXX -->
+                            <!-- SSN intentionally NOT saved to cookies or local storage for security -->
                             <input
                               type="password"
                               minlength="9"
@@ -518,6 +525,7 @@ Purpose: MIS 3371 Homework 4 HTML Form
                         <td>
                             <!-- 10-30 chars, must have uppercase, lowercase, number, special char -->
                             <!-- validated on input and blur for real-time feedback -->
+                            <!-- passwords are NOT saved to cookies or local storage -->
                             <input
                               type="password"
                               name="pass"
@@ -555,10 +563,24 @@ Purpose: MIS 3371 Homework 4 HTML Form
                         </td>
                     </tr>
 
+                    <!-- remember me checkbox: if checked, saves info to cookie and local storage -->
+                    <tr>
+                        <td class="td1"><label for="rememberMe">Remember Me:</label></td>
+                        <td>
+                            <input
+                              type="checkbox"
+                              id="rememberMe"
+                              name="rememberMe"
+                              checked
+                              title="Check to save your information for your next visit. Uncheck to clear all saved data."
+                              />
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class="td1" colspan="4">
                             <center>
-                                 <!-- submit button hidden by default, only shown after Validate passes -->
+                                 <!-- submit button disabled by default, only enabled after Validate passes -->
                                  <!-- reset button clears all form inputs -->
                                  <!-- review button triggers reviewInput() to redisplay entered data below form -->
                                  <!-- validate button runs all JS checks before allowing submission -->
@@ -602,8 +624,8 @@ Purpose: MIS 3371 Homework 4 HTML Form
 </div>
 
 <!-- footer iframe: loads footer.html as a separate file, sits flush at the bottom -->
-<iframe src="footer.html" width="100%" height="100px" title="footer" style="display: block;"></iframe>
+<iframe src="footer.html" width="100%" height="50px" title="footer" style="display: block; border: none;"></iframe>
 
-<script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, and review functionality -->
+<script src="script.js"></script> <!-- links external JavaScript file for dynamic date, validation, cookies, local storage, and review functionality -->
   </body>
 </html>
