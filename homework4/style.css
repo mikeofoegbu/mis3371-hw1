@@ -14,8 +14,17 @@ Purpose: MIS 3371 Homework 4 CSS Stylesheet
 
 /* styles header section containing logo, clinic title, and dynamic date */
 header {
+    position: sticky;
+    top: 0;
     width: 100%;
     background-color: red; /* red background aligns with UFC brand colors */
+        transition: background-color 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+header.scrolled {
+    background-color: red
+    opacity: 1.0;
 }
 
 /* body uses flexbox to center content and keep footer positioned at bottom */
