@@ -76,16 +76,6 @@ var fields = [
     { id: "uname",    key: "ls_uname"    },
 ];
 
-// saves a single field's value to local storage when the user types in it
-function saveFieldToStorage(fieldId, storageKey) {
-    var el = document.getElementById(fieldId);
-    if (el) {
-        el.addEventListener("input", function () {
-            localStorage.setItem(storageKey, el.value);
-        });
-    }
-}
-
 // pre-fills a field from local storage if a saved value exists
 function loadFieldFromStorage(fieldId, storageKey) {
     var el = document.getElementById(fieldId);
@@ -105,12 +95,24 @@ function clearLocalStorage() {
 }
 
 // =====================================================================
-// COOKIE + LOCAL STORAGE: PAGE LOAD LOGIC
-// on page load, check if a cookie exists for this user
-// if it does: show welcome back message, pre-fill fields from local storage
-// if it doesn't: show nothing, wait for user to fill in the form
+// PAGE LOAD
 // =====================================================================
 window.onload = function () {
+
+    // FETCH API
+    // loads state dropdown options from external states.html file on page load
+    // professor specifically suggested this as an example of Fetch API usage
+    fetch("states.html")
+        .then(function(response) { return response.text(); })
+        .then(function(data) {
+            document.getElementById("state").innerHTML = data;
+        })
+        .catch(function(error) {
+            console.log("Could not load states list: " + error);
+        });
+
+    // COOKIE CHECK
+    // if a returning user cookie exists, show welcome message and pre-fill form
     var firstName = getCookie("ufc_firstname");
 
     if (firstName !== "") {
